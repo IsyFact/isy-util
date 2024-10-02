@@ -1,0 +1,14 @@
+de\bund\bva\isyfact\util\persistence\usertype\EnumUserType.class
+de\bund\bva\isyfact\util\messages\MessageSourceHolder.class
+de\bund\bva\isyfact\util\messages\MessageProvider.class
+de\bund\bva\isyfact\util\persistence\usertype\AbstractImmutableStringUserType.class
+de\bund\bva\isyfact\util\persistence\annotation\EnumId.class
+de\bund\bva\isyfact\util\persistence\datasource\ApplicationRunnerDbSchemaCheck.class
+de\bund\bva\isyfact\util\messages\FehlerSchluessel.class
+de\bund\bva\isyfact\util\persistence\datasource\DataSourceCheck.class
+de\bund\bva\isyfact\util\logging\CombinedMarkerFactory.class
+de\bund\bva\isyfact\util\common\RecursiveToStringBuilder.class
+de\bund\bva\isyfact\util\persistence\usertype\EnumWithIdUserType.class
+de\bund\bva\isyfact\util\messages\MessageSourceMessageProvider.class
+de\bund\bva\isyfact\util\persistence\annotation\PersistentValue.class
+de\bund\bva\isyfact\util\persistence\usertype\AbstractImmutableUserType.class
