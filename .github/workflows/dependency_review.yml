@@ -8,3 +8,6 @@ on:
 jobs:
   DependencyReview:
     uses: IsyFact/isy-github-actions-templates/.github/workflows/dependency_review_template.yml@v1.6.0
+    with:
+      allow-dependencies-licenses:
+        'pkg:maven/org.jacoco/jacoco-maven-plugin'
