@@ -1,0 +1,174 @@
+= Nutzungsvorgaben Isy Util: Inhalt
+
+// tag::inhalt[]
+[[aufbau-von-isy-util]]
+== Aufbau von isy-util
+
+[[package-logging]]
+=== Package logging
+
+In `de.bund.bva.isyfact.util.logging` sind Klassen enthalten, die für das Logging einzusetzen sind:
+
+* `CombinedMarkerFactory`: Mit dieser Klasse können zusammengesetzte __Marker__ erzeugt werden, die beim Logging mit _slf4j_ verwendet werden können, um Log-Einträge mit Markierungen zu versehen.
+
+
+[[package-text]]
+=== Package text
+
+Das Package `text` enthält Werkzeuge für die Erzeugung standardisierter Ausgabe-Nachrichten:
+
+* `RecursiveToStringBuilder`: Diese Klasse erzeugt eine Textausgabe für Objekte, die keine geeignete `toString`-Methode implementieren.
+
+* `MessageSourceMessageProvider`: Durch diese Klasse wird ein `MessageProvider` implementiert, mit dem die Erzeugung standardisierter Nachrichten möglich ist.
+
+* `MessageSourceHolder`: Der `MessageSourceHolder` ist eine Referenz auf die aktuelle `MessageSource`-Bean.
+Zusätzlich bietet er Convenience-Funktionen zum Auslesen von `ResourceBundle`-Einträgen aus der `MessageSource`.
+
+[[package-persistence]]
+=== Package persistence
+Das Package `de.bund.bva.isyfact.util.persistence` enthält unterstützende Klassen für den Umgang mit Datenbanken:
+
+* Das Unterpaket `datasource` enthält die Klasse `DataSourceCheck' , mit der Datenbaktabelle auf die richtige Schema-Version geprüft werden kann. Mit der Klasse `ApplicationRunnerDbSchemaCheck` kann diese Prüfung beim Start einer Spring-Anwendung automatisiert werden.
+
+* Die Unterpakete `annotation` und `usertype` enthalten Klassen zum Umgang mit Enum-Entitäten.
+
+[[nutzung-von-isy-util]]
+== Die Utility-Klassen von isy-util
+
+[[logging]]
+=== Logging-Marker
+
+Mit Hilfe der statischen Methoden aus der `CombinedMarkerFactory` können Standard-Log_Ausgaben aus `slf4j` markiert werden.
+
+.Markierung einer Log-Ausgabe mit Hilfe der Methode `CombinedMarkerFactory.createSchluesselMarker`
+[source,java]
+[[anwendung-markerfactory]]
+----
+import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createSchluesselMarker;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+class Demo{
+
+    void demo(){
+        Logger logger = LoggerFactory.getLogger(Demo.class);
+        logger.info(createSchluesselMarker("SCHLUESSEL"),"Diese Info-Nachricht ist mit dem Wert aus SCHLUESSEL markiert");
+    }
+}
+
+
+
+----
+
+
+[[persistence-datasource]]
+=== Datasource-Check
+
+Eine Anfrage mit dem `DataSourceCheck`erfolgt über eine der  Methoden `checkSchemaVersionCriticalDataSource` oder `checkSchemaVersionNonCriticalDataSource`. Beide Methoden liefern ein `boolean` zurück, auf das die Applikation entsprechend regieren kann:
+
+.Durchführung einer Schema-Prüfung
+[[datasource-check]]
+[source,java]
+----
+
+import de.bund.bva.isyfact.util.persistence.datasource.DataSourceCheck;import java.sql.SQLException;import static de.bund.bva.isyfact.util.persistence.datasource.DataSourceCheck.checkSchemaVersionCriticalDatasource;
+
+class Demo{
+    void startUp(DataSource dataSource, String version) {
+        DataSourceCheck dsc = new DataSourceCheck();
+        if(!dsc.checkSchemaVersionCriticalDatasource(dataSource, version) ){
+            // handle errors, do logging etc
+        }
+    }
+}
+----
+
+Voraussetzung ist die Existenz einer Datenbank-Tabelle, die die aktuelle Schema-Version enthält. Der DatabaseSchemaCheck fragt die Tabelle mit einem voreingestellten SQL-Statement ab:
+
+
+.Abfrage der Schema-Version-Tabelle (Standard)
+[[check-sql]]
+[source,sql]
+----
+SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'
+----
+
+Andere Formen der Schema-Tabelle können ebenfalls verwendet werden. In diesem Fall muss bei der Erzeugung das DatabaseSchemaCheck die geeignete SQL-Abfrage als Parameter angegeben werden.
+
+
+Für Anwendungen unter `Spring` existiert der Wrapper `ApplicationRunnerDbSchemaCheck`, der als Spring-Komponente hinzugefügt wird und als Implementierung eines `ApplicationRunner` nach vollständiger Initialisierung der Spring-Anwendung den Check automatisch durchführt.
+
+
+[[enum-variablen]]
+=== Enum-Variablen und Annotations
+
+Zum vereinfachten Umgang mit Enum-Variablen im Zusammenhang mit Datenbanken steht die Annotation `PersistentValue` zur
+Verfügung:
+
+
+[[definition-enumusertype]]
+[source,java]
+----
+public enum Richtung {
+
+    @PersistentValue("L")
+    LINKS,
+    @PersistentValue("R")
+    RECHTS,
+    @PersistentValue("G")
+    GERADEAUS
+
+}
+----
+
+Die Klasse `EnumWithIdUserType` erlaubt die Persistierung von Enums, die einen fachlichen Schlüssel besitzen.
+
+.Definition eines Enums zur Verwendung mit `EnumWithIdUserType`
+[[definition-enumwithidusertype]]
+[source,java]
+----
+public enum RichtungMitId {
+
+    LINKS("L"),
+    RECHTS("R"),
+    GERADEAUS("G");
+
+    private final String id;
+
+    RichtungMitId(String id) {
+        this.id = id;
+    }
+
+    @EnumId
+    public String getId() {
+        return id;
+    }
+
+}
+----
+
+Das folgende Beispiel zeigt die Verwendung dieser Enums in einer Entität.
+
+.Verwendung von Enums in Entitäten
+[[verwendung-enum-in-entitaeten]]
+[source,java]
+----
+@Entity
+public class MyEntity {
+
+  @Column(nullable = false, length = 1)
+  @Type(type = "de.bund.bva.isyfact.persistence.usertype.EnumUserType",
+    parameters = { @Parameter(name = "enumClass",value = "<package>.Richtung") })
+  private Richtung richtung;
+
+  @Column(nullable = false, length = 1)
+  @Type(type = "de.bund.bva.isyfact.persistence.usertype.EnumWithIdUserType",
+    parameters = { @Parameter(name = "enumClass",value = "<package>.RichtungMitId") })
+  private RichtungMitId richtungMitId;
+
+}
+----
+
+
+// end::inhalt[]

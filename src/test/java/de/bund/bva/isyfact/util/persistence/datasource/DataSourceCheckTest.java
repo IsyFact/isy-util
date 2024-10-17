@@ -1,8 +1,6 @@
 package de.bund.bva.isyfact.util.persistence.datasource;
 
 import junit.framework.TestCase;
-import org.junit.Before;
-import org.junit.Test;
 import org.mockito.Mockito;
 
 import javax.sql.DataSource;
@@ -22,7 +20,7 @@ public class DataSourceCheckTest extends TestCase {
     PreparedStatement statement = Mockito.mock(PreparedStatement.class);
     ResultSet resultSet = Mockito.mock(ResultSet.class);
 
-    @Before
+
     public void setUp() throws SQLException {
         when(dataSource.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
@@ -30,7 +28,6 @@ public class DataSourceCheckTest extends TestCase {
         when(resultSet.next()).thenReturn(true);
     }
 
-    @Test
     public void testGetSchemaVersion() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -40,7 +37,6 @@ public class DataSourceCheckTest extends TestCase {
         assertEquals(expected, version);
     }
 
-    @Test
     public void testCheckSchemaVersionCriticalDataSourceTrue() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -50,8 +46,7 @@ public class DataSourceCheckTest extends TestCase {
         assertTrue(ok);
     }
 
-    @Test
-    public void testCheckSchemaVersionCriticalDataSourceFalse() throws SQLException {
+   public void testCheckSchemaVersionCriticalDataSourceFalse() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
 
@@ -61,7 +56,6 @@ public class DataSourceCheckTest extends TestCase {
     }
 
 
-    @Test
     public void testCheckSchemaVersionNonCriticalDataSourceTrue() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -71,7 +65,6 @@ public class DataSourceCheckTest extends TestCase {
         assertTrue(ok);
     }
 
-    @Test
     public void testCheckSchemaVersionNonCriticalDataSourceFalse() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);

@@ -1,0 +1,36 @@
+= Konzept Util (Hilfsklassen): Inhalt
+
+// tag::inhalt[]
+[[Utilities]]
+== Utilities
+
+
+Die Bibliothek `isy-util` dient dazu, häufig benötigte Funktionen und wiederverwendbare Bausteine in einer zentralen Sammlung bereitzustellen, um die Entwicklung von Anwendungen in der IsyFact effizienter und übersichtlicher zu gestalten. Diese Bibliothek enthält generische, häufig vorkommende Methoden, die sich in verschiedenen Projekten wiederfinden und den Code aufräumen, indem sie redundante Aufgaben auslagern.
+
+Hauptziele sind:
+
+- *Wiederverwendbarkeit*: Einmal implementierte Funktionalitäten können in mehreren Projekten verwendet werden, ohne sie neu schreiben zu müssen.
+- *Wartbarkeit*: Gemeinsame Aufgaben wie String-Operationen, Datum- und Zeitberechnungen, Fehlerbehandlung oder Konvertierungen werden zentralisiert, was die Pflege und Weiterentwicklung erleichtert.
+- *Konsistenz*: Durch die Nutzung einheitlicher Methoden für bestimmte Aufgaben wird die Konsistenz im Code gefördert, wodurch die Fehleranfälligkeit verringert und die Lesbarkeit erhöht wird.
+
+`ìsy-util` ist besonders nützlich, um standardisierte Lösungen für alltägliche Herausforderungen der Programmierung zu bieten, sei es im Umgang mit Collections, Dateioperationen oder mathematischen Berechnungen. Sie zielt darauf ab, die Effizienz bei der Entwicklung zu steigern und den Entwicklern mehr Zeit zu geben, sich auf die geschäfts-logischen Aspekte ihrer Anwendungen zu konzentrieren.
+
+Diese Funktionen werden im Folgenden überblicksartig beschrieben.
+
+[[logging]]
+=== Logging-Marker
+
+Eine der wesentlichen Funktionen des obsoleten Pakets `isy-logging` bestand in der transparenten Verwendung von Markern, mit denen Log-Ausgaben gefiltert werden können. Da eine zu enge Kopplung an die konkrete Implementierung in `logback` entstand, wurde die Klasse xref:nutzungsvorgaben/inhalt.adoc#anwendung-markerfactory[`CombinedMarkerFactory`] entwickelt. Sie enthält mehrere statische Methoden, mit denen wie in `isy-logging` verschachtelte Marker-Hierarchien zur Anwendung mit Loggern aus `slf4j` erzeugt werden können. Dabei wird nicht auf eine konkrete Implementierung von Markern zurückgegriffen. `CombinedMarkerFactory` sollte bei Bedarf um weitere statische Convenience-Methoden erweitert werden.
+
+
+[[persistence]]
+=== Persistence
+
+Bis zur endgültigen Umstellung auf Versionierung mit Tools wie `Liquibase` ist es ratsam, dass Applikationen beim Start prüfen, ob die richtige Datenbankversion eingespielt wurde. Dazu wird eine jeweils eine Tabelle mit ausgerollt, die die aktuell gültige(n) Versionsnummern der Datenbank-Schemas liefert. Diese Tabelle kann beim Start einer Applikation geprüft werden, so dass in einem Fehlerfall die Applikation gestoppt werden kann. ìsy-util` stellt dazu mit xref:nutzungsvorgaben/inhalt.adoc#persistence-datasource[`DataSourceCheck`] ein Tool zur Überprüfung von Datenbank-Schema-Versionen zur Verfügung.
+
+[[text]]
+=== Text-Utilities
+
+
+
+// end::inhalt[]

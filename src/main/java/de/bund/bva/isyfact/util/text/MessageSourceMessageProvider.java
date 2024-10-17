@@ -14,11 +14,23 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package de.bund.bva.isyfact.util.common.test;
 
-public class MyNode {
+package de.bund.bva.isyfact.util.text;
 
-	public MyNode child;
-	
-	public String str;
+/**
+ * Diese Klasse implementiert einen Provider für Texte, der zum Laden der Nachrichten den
+ * {@link MessageSourceHolder} verwendet. Letztere muss als Spring-Bean in der Anwendung konfiguriert sein.
+ */
+public class MessageSourceMessageProvider {
+
+    /**
+     * Returns the message to the given key.
+     *
+     * @param schluessel The key.
+     * @param parameter  Optional parameters.
+     * @return The message to the given key.
+     */
+    public String getMessage(String schluessel, String... parameter) {
+        return MessageSourceHolder.getMessage(schluessel, parameter);
+    }
 }

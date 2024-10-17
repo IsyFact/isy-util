@@ -1,4 +1,4 @@
-package de.bund.bva.isyfact.util.messages;
+package de.bund.bva.isyfact.util.text;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
