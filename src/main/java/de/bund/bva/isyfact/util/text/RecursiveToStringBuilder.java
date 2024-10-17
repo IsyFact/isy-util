@@ -14,7 +14,7 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package de.bund.bva.isyfact.util.common;
+package de.bund.bva.isyfact.util.text;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;

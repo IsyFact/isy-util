@@ -6,7 +6,7 @@
 
 ## Beschreibung
 
-isy-util bietet zahlreiche Hilfsklassen zur Verwendung zusammen mit der Isyfact-Bibliothek.
+isy-util bietet zahlreiche Hilfsklassen zur Verwendung mit der Isyfact-Bibliothek.
 
 ## Features
 
@@ -15,7 +15,7 @@ isy-util enthhält:
 <ul>
 <li>Einen Stringbuilder, der rekursiv die Attribute eines Objekts beschreibt.</li>
 <li>Einen MessageProvider zur Ausgabe von Nachrichten, etwa innerhalb des Logging-Frameworks</li>
-<li>Eine markerfactory zur komfortablen Erstellung komplexer Marker-Strukturen für Logausgaben.</li>
+<li>Eine MarkerFactory zur komfortablen Erstellung komplexer Marker-Strukturen für Log-Ausgaben.</li>
 <li>Klassen zur Überprüfung der korrekten Schema-Version einer Datenbank.</li>
 <li>Klassen zur Persistierung von enum-Typen.</li>
 

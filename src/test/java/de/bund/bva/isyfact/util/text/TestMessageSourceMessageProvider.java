@@ -14,7 +14,7 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package de.bund.bva.isyfact.util.messages;
+package de.bund.bva.isyfact.util.text;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

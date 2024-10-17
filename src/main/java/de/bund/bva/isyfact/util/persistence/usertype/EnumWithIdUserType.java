@@ -27,10 +27,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static de.bund.bva.isyfact.util.messages.FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION;
-import static de.bund.bva.isyfact.util.messages.FehlerSchluessel.UNBEKANNTER_STRING;
-import static de.bund.bva.isyfact.util.messages.FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG;
-import static de.bund.bva.isyfact.util.messages.MessageProvider.getMessage;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTER_STRING;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG;
+import static de.bund.bva.isyfact.util.text.MessageProvider.getMessage;
 
 /**
  * Ein {@link UserType} zur Persistierung von Enumtypen, die einen Schlüssel enthalten, als String, d.h. in

@@ -14,10 +14,8 @@
  * implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package de.bund.bva.isyfact.util.common;
+package de.bund.bva.isyfact.util.text;
 
-import de.bund.bva.isyfact.util.common.test.MyNode;
-import de.bund.bva.isyfact.util.messages.MessageSourceMessageProvider;
 import org.junit.Test;
 
 import javax.naming.CompositeName;
@@ -55,7 +53,7 @@ public class TestRecursiveToStringBuilder {
     }
 
     @Test
-    public void testNonPrimitiveArray() throws InvalidNameException {
+    public void testNonPrimitiveArray() {
         Object[] arr = new Object[]{1, "20", new String[]{"foo", "bar"}, new CompositeName()};
 
         String result = RecursiveToStringBuilder.recursiveToString(arr);
@@ -96,7 +94,7 @@ public class TestRecursiveToStringBuilder {
         MessageSourceMessageProvider generic = new MessageSourceMessageProvider();
         String result = RecursiveToStringBuilder.recursiveToString(generic);
         assertTrue(
-                result.startsWith("de.bund.bva.isyfact.util.messages.MessageSourceMessageProvider"));
+                result.startsWith("de.bund.bva.isyfact.util.text.MessageSourceMessageProvider"));
     }
 
     @Test
@@ -104,7 +102,7 @@ public class TestRecursiveToStringBuilder {
         MyNode node = new MyNode();
         node.child = node;
         String result = RecursiveToStringBuilder.recursiveToString(node);
-        assertTrue(result.startsWith("de.bund.bva.isyfact.util.common.test.MyNode"));
+        assertTrue(result.startsWith("de.bund.bva.isyfact.util.text.MyNode"));
     }
 
     @Test
@@ -116,7 +114,7 @@ public class TestRecursiveToStringBuilder {
         node1.str = str;
         node2.str = str;
         String result = RecursiveToStringBuilder.recursiveToString(node1);
-        assertTrue(result.startsWith("de.bund.bva.isyfact.util.common.test.MyNode"));
+        assertTrue(result.startsWith("de.bund.bva.isyfact.util.text.MyNode"));
     }
 
     public enum Day {

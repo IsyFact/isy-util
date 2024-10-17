@@ -18,15 +18,15 @@ import javax.sql.DataSource;
 @Component
 public class ApplicationRunnerDbSchemaCheck implements ApplicationRunner {
     /**
-     * The used logger
+     * The used logger.
      */
     private final static Logger LOG = LoggerFactory.getLogger(ApplicationRunnerDbSchemaCheck.class);
     /**
-     * Data source, provided at startup
+     * Data source, provided at startup.
      */
     private final DataSource dataSource;
     /**
-     * The schema version as specified in application properties
+     * The schema version as specified in application properties.
      */
     private final String schemaVersion;
 
@@ -43,10 +43,10 @@ public class ApplicationRunnerDbSchemaCheck implements ApplicationRunner {
     }
 
     /**
-     * Performs the checks at application startup
+     * Performs the checks at application startup.
      *
-     * @param args Optional start arguments
-     * @throws Exception An error has occurred
+     * @param args Optional start arguments.
+     * @throws Exception An error has occurred.
      */
     @Override
     public void run(ApplicationArguments args) throws Exception {
