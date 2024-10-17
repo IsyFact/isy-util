@@ -17,7 +17,7 @@
 package de.bund.bva.isyfact.util.persistence.usertype;
 
 
-import de.bund.bva.isyfact.util.messages.FehlerSchluessel;
+import de.bund.bva.isyfact.util.text.FehlerSchluessel;
 import de.bund.bva.isyfact.util.persistence.annotation.PersistentValue;
 import jakarta.persistence.PersistenceException;
 import org.hibernate.usertype.ParameterizedType;
@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static de.bund.bva.isyfact.util.messages.MessageProvider.getMessage;
+import static de.bund.bva.isyfact.util.text.MessageProvider.getMessage;
 
 /**
  * Ein {@link UserType} zur Persistierung beliebiger Enumtypen als String, d.h. in eine VARCHAR-Spalte. Die

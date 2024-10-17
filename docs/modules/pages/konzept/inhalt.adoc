@@ -1,8 +1,0 @@
-= Konzept Util (Hilfsklassen): Inhalt
-
-// tag::inhalt[]
-[[Utilities]]
-== Utilities
-
-
-// end::inhalt[]

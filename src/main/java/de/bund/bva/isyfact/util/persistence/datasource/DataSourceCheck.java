@@ -38,7 +38,7 @@ public class DataSourceCheck {
     /**
      * Default constructor with custom schema query.
      *
-     * @param schemaQuery The custom schema query
+     * @param schemaQuery The custom schema query.
      */
     public DataSourceCheck(String schemaQuery) {
         this.schemaQuery = schemaQuery;
