@@ -28,9 +28,5 @@ Eine der wesentlichen Funktionen des obsoleten Pakets `isy-logging` bestand in d
 
 Bis zur endgültigen Umstellung auf Versionierung mit Tools wie `Liquibase` ist es ratsam, dass Applikationen beim Start prüfen, ob die richtige Datenbankversion eingespielt wurde. Dazu wird eine jeweils eine Tabelle mit ausgerollt, die die aktuell gültige(n) Versionsnummern der Datenbank-Schemas liefert. Diese Tabelle kann beim Start einer Applikation geprüft werden, so dass in einem Fehlerfall die Applikation gestoppt werden kann. ìsy-util` stellt dazu mit xref:nutzungsvorgaben/inhalt.adoc#persistence-datasource[`DataSourceCheck`] ein Tool zur Überprüfung von Datenbank-Schema-Versionen zur Verfügung.
 
-[[text]]
-=== Text-Utilities
-
-
 
 // end::inhalt[]

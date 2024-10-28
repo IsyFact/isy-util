@@ -1,7 +1,5 @@
 = Konzept Util: Einleitung
 
 // tag::inhalt[]
-[[einleitung]]
-== Einleitung
 
 // end::inhalt[]
