@@ -4,7 +4,6 @@
 [[Utilities]]
 == Utilities
 
-
 Die Bibliothek `isy-util` dient dazu, häufig benötigte Funktionen und wiederverwendbare Bausteine in einer zentralen Sammlung bereitzustellen, um die Entwicklung von Anwendungen in der IsyFact effizienter und übersichtlicher zu gestalten. Diese Bibliothek enthält generische, häufig vorkommende Methoden, die sich in verschiedenen Projekten wiederfinden und den Code aufräumen, indem sie redundante Aufgaben auslagern.
 
 Hauptziele sind:
