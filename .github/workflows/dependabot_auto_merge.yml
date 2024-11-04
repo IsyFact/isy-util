@@ -2,10 +2,7 @@ name: Dependabot Auto Merge
 on:
   pull_request:
     branches:
-      - master
-      - release/**
-    paths:
-      - pom.xml
+      - develop
 
 jobs:
   DependabotAutoMerge:
