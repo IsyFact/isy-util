@@ -1,4 +1,4 @@
-= Konzept isy-util
+= Konzept Util
 
 include::glossary:licence:partial$licence.adoc[]
 include::docinfo.adoc[]
