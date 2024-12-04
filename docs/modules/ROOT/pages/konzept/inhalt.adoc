@@ -30,6 +30,9 @@ Bis zur endgültigen Umstellung auf Versionierung mit Tools wie `Liquibase` ist 
 [[text]]
 === Text-Utilities
 
+Um in den verschiedenen Anwendungen einheitlichen Textausgaben zu erzeuge, etwa bei Fehlermeldungen und Log-Ausgaben, befinden sich im Unterpaket `text` Methoden zu Erzeugung parametrisierbarer Texte. Dies sind:
 
+* `MessageSourceProvider` - Eine Klasse zur Erzeugung von Texten, die auch parametrisiert sein können.
+* `RecursiveToStringBuilder` - Ein Tool zur Erzeugung eines "Text-Dumps" von komplexen Objekten.
 
 // end::inhalt[]
