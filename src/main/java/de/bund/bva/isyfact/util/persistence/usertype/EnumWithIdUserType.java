@@ -30,7 +30,7 @@ import java.util.Properties;
 import static de.bund.bva.isyfact.util.text.FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION;
 import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTER_STRING;
 import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG;
-import static de.bund.bva.isyfact.util.text.MessageProvider.getMessage;
+import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
 
 /**
  * Ein {@link UserType} zur Persistierung von Enumtypen, die einen Schlüssel enthalten, als String, d.h. in
@@ -63,7 +63,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
         for (Method m : enumClass.getMethods()) {
             if (m.getAnnotation(EnumId.class) != null) {
                 if (idGetter != null) {
-                    throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION,
+                    throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION,
                             "Mehr als eine Methode in " + enumClass.getName() + " ist mit "
                                     + EnumId.class.getSimpleName() + " annotiert."));
                 }
@@ -71,7 +71,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
             }
         }
         if (idGetter == null) {
-            throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION, "Keine Methode in "
+            throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION, "Keine Methode in "
                     + enumClass.getName() + " ist mit " + EnumId.class.getSimpleName() + " annotiert."));
         }
 
@@ -79,7 +79,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
             String enumId = getEnumId(enumValue);
             Enum<?> oldValue = stringToEnum.put(enumId, enumValue);
             if (oldValue != null) {
-                throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION, "Im Enum "
+                throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION, "Im Enum "
                         + enumClass + " wird zweimal der Schlüssel '" + enumId + "' benutzt"));
             }
         }
@@ -99,7 +99,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
     public Object convertStringToInstance(String value) {
         Enum<?> e = stringToEnum.get(value);
         if (e == null) {
-            throw new PersistenceException(getMessage(UNBEKANNTER_STRING, value, enumClass.getName()));
+            throw new PersistenceException(createMessage(UNBEKANNTER_STRING, value, enumClass.getName()));
         }
         return e;
     }
@@ -111,7 +111,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
     public String convertInstanceToString(Object value) {
         String enumId = getEnumId((Enum<?>) value);
         if (enumId == null) {
-            throw new PersistenceException(getMessage(UNBEKANNTE_AUSPRAEGUNG, value.toString(), enumClass.getName()));
+            throw new PersistenceException(createMessage(UNBEKANNTE_AUSPRAEGUNG, value.toString(), enumClass.getName()));
         }
         return enumId;
     }
@@ -139,20 +139,20 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
     public void setParameterValues(Properties parameters) {
         String enumClassName = parameters.getProperty("enumClass");
         if (enumClassName == null) {
-            throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION,
+            throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION,
                     "Parameter 'enumClass' fehlt für " + EnumWithIdUserType.class.getSimpleName()));
         }
         try {
             Class<?> clazz = Class.forName(enumClassName);
             if (!clazz.isEnum()) {
-                throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION, "Klasse "
+                throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION, "Klasse "
                         + clazz.getName() + " ist kein Enum"));
             }
             @SuppressWarnings("unchecked")
             Class<? extends Enum<?>> enumClazz = (Class<? extends Enum<?>>) clazz;
             setEnumClass(enumClazz);
         } catch (ClassNotFoundException e) {
-            throw new PersistenceException(getMessage(FALSCHE_ENUM_KONFIGURATION, "Enum-Klasse "
+            throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION, "Enum-Klasse "
                     + enumClassName + " nicht gefunden"));
         }
     }

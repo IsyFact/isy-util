@@ -20,7 +20,7 @@ public class MessageProvider {
      * @return The created message.
      */
 
-    public static String getMessage(String key, String... text) {
+    public static String createMessage(String key, String... text) {
         return format("[{0}] {1}", key, format(MESSAGE_BUNDLE.getString(key), (Object[]) text));
     }
 
