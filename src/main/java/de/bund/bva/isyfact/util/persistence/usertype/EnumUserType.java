@@ -28,7 +28,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static de.bund.bva.isyfact.util.text.MessageProvider.getMessage;
+import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
 
 /**
  * Ein {@link UserType} zur Persistierung beliebiger Enumtypen als String, d.h. in eine VARCHAR-Spalte. Die
@@ -67,14 +67,14 @@ public class EnumUserType extends AbstractImmutableStringUserType implements Par
             }
             PersistentValue persValue = field.getAnnotation(PersistentValue.class);
             if (persValue == null) {
-                throw new PersistenceException(getMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Der Enumwert "
+                throw new PersistenceException(createMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Der Enumwert "
                         + field.getType() + "." + field.getName() + " ist nicht mit "
                         + PersistentValue.class.getSimpleName() + " annotiert"));
             }
             enumToString.put(enumValue, persValue.value());
             Enum<?> oldValue = stringToEnum.put(persValue.value(), enumValue);
             if (oldValue != null) {
-                throw new PersistenceException(getMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Im Enum "
+                throw new PersistenceException(createMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Im Enum "
                         + field.getType() + " ist der Persistenzwert '" + persValue.value() + "' zweimal annotiert"));
             }
         }
@@ -91,7 +91,7 @@ public class EnumUserType extends AbstractImmutableStringUserType implements Par
     public Object convertStringToInstance(String value) {
         Enum<?> e = stringToEnum.get(value);
         if (e == null) {
-            throw new PersistenceException(getMessage(FehlerSchluessel.UNBEKANNTER_STRING, value, enumClass.getName()));
+            throw new PersistenceException(createMessage(FehlerSchluessel.UNBEKANNTER_STRING, value, enumClass.getName()));
         }
         return e;
     }
@@ -100,7 +100,7 @@ public class EnumUserType extends AbstractImmutableStringUserType implements Par
     public String convertInstanceToString(Object value) {
         String s = enumToString.get(value);
         if (s == null) {
-            throw new PersistenceException(getMessage(FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG, value.toString(),
+            throw new PersistenceException(createMessage(FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG, value.toString(),
                     enumClass.getName()));
         }
         return s;
@@ -112,20 +112,20 @@ public class EnumUserType extends AbstractImmutableStringUserType implements Par
     public void setParameterValues(Properties parameters) {
         String enumClassName = parameters.getProperty("enumClass");
         if (enumClassName == null) {
-            throw new PersistenceException(getMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION,
+            throw new PersistenceException(createMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION,
                     "Parameter 'enumClass' fehlt für " + EnumUserType.class.getSimpleName()));
         }
         try {
             Class<?> clazz = Class.forName(enumClassName);
             if (!clazz.isEnum()) {
-                throw new PersistenceException(getMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Klasse "
+                throw new PersistenceException(createMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Klasse "
                         + clazz.getName() + " ist kein Enum"));
             }
             @SuppressWarnings("unchecked")
             Class<? extends Enum<?>> enumClazz = (Class<? extends Enum<?>>) clazz;
             setEnumClass(enumClazz);
         } catch (ClassNotFoundException e) {
-            throw new PersistenceException(getMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Enum-Klasse "
+            throw new PersistenceException(createMessage(FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION, "Enum-Klasse "
                     + enumClassName + " nicht gefunden"), e);
         }
     }
