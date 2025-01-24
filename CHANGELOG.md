@@ -1,4 +1,5 @@
 # 2.4.0
+- `IFS-4185`: Bereitsstellung eines MarkerGenerator, nutzbar für das Logging 
 - `RF-1040`: Scope für Spotbugs-Annotations Abhängigkeit auf provided gesetzt
 
 # 2.2.0
