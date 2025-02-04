@@ -19,7 +19,7 @@ Diese Funktionen werden im Folgenden überblicksartig beschrieben.
 [[logging]]
 === Logging-Marker
 
-Eine der wesentlichen Funktionen des obsoleten Pakets `isy-logging` bestand in der transparenten Verwendung von Markern, mit denen Log-Ausgaben gefiltert werden können. Da eine zu enge Kopplung an die konkrete Implementierung in `logback` entstand, wurde die Klasse xref:nutzungsvorgaben/inhalt.adoc#anwendung-markerfactory[`CombinedMarkerFactory`] entwickelt. Sie enthält mehrere statische Methoden, mit denen wie in `isy-logging` verschachtelte Marker-Hierarchien zur Anwendung mit Loggern aus `slf4j` erzeugt werden können. Dabei wird nicht auf eine konkrete Implementierung von Markern zurückgegriffen. `CombinedMarkerFactory` sollte bei Bedarf um weitere statische Convenience-Methoden erweitert werden.
+Eine der wesentlichen Funktionen des Pakets `isy-logging` besteht in der transparenten Verwendung von Markern, mit denen Log-Ausgaben gefiltert werden können. Da eine zu enge Kopplung an die konkrete Implementierung in `logback` entstehen könnte, wurde die Klasse xref:nutzungsvorgaben/inhalt.adoc#anwendung-markerfactory[`CombinedMarkerFactory`] entwickelt, um zu starke Abhängigkeiten in Bibliotheken zu vermeiden. Sie enthält mehrere statische Methoden, mit denen wie in `isy-logging` verschachtelte Marker-Hierarchien zur Anwendung mit Loggern aus `slf4j` erzeugt werden können. Dabei wird nicht auf eine konkrete Implementierung von Markern zurückgegriffen. `CombinedMarkerFactory` sollte bei Bedarf um weitere statische Convenience-Methoden erweitert werden.
 
 
 [[persistence]]
