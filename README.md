@@ -28,7 +28,7 @@ isy-util enthhält:
 
 ### Mitwirken
 
-Wir freuen uns über Beiträge zur Weiterentwicklung von isy-uti.
+Wir freuen uns über Beiträge zur Weiterentwicklung von isy-util.
 
 ### Lizenz
 
