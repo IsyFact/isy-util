@@ -1,4 +1,5 @@
 # 2.4.0
+- `IFS-4185`: Bereitsstellung eines MarkerGenerator, nutzbar für das Logging 
 - `IFS-4181`: Überführung EnumHandler aus isy-persistence und Bereitstellung zur Nutzung als Baustein
 - `RF-1040`: Scope für Spotbugs-Annotations Abhängigkeit auf provided gesetzt
 
