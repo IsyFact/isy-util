@@ -1,3 +1,13 @@
+# 5.0.0
+- `IFS-4575`: Portierung fehlender Tickets aus isy-standards
+  - ISY-1025: Entfernen der JUnit Enginge Test Dependency
+  - IFS-4367: Entfernen des Serviceproviders 
+
+# 4.0.0
+- `IFS-4575`: Portierung fehlender Tickets aus isy-standards
+  - IFS-4482: Entfernen des Message Source Holders
+    - *BREAKING CHANGE* Deprecated Klasse `MessageSourceHolder` entfernt
+
 # 2.4.0
 - `IFS-4185`: Bereitsstellung eines MarkerGenerator, nutzbar für das Logging 
 - `IFS-4181`: Überführung EnumHandler aus isy-persistence und Bereitstellung zur Nutzung als Baustein
