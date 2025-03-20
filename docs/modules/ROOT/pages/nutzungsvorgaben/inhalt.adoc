@@ -19,11 +19,6 @@ Das Package `text` enthält Werkzeuge für die Erzeugung standardisierter Ausgab
 
 * `RecursiveToStringBuilder`: Diese Klasse erzeugt eine Textausgabe für Objekte, die keine geeignete `toString`-Methode implementieren.
 
-* `MessageSourceMessageProvider`: Durch diese Klasse wird ein `MessageProvider` implementiert, mit dem die Erzeugung standardisierter Nachrichten möglich ist.
-
-* `MessageSourceHolder`: Der `MessageSourceHolder` ist eine Referenz auf die aktuelle `MessageSource`-Bean.
-Zusätzlich bietet er Convenience-Funktionen zum Auslesen von `ResourceBundle`-Einträgen aus der `MessageSource`.
-
 [[package-persistence]]
 === Package persistence
 Das Package `de.bund.bva.isyfact.util.persistence` enthält unterstützende Klassen für den Umgang mit Datenbanken:

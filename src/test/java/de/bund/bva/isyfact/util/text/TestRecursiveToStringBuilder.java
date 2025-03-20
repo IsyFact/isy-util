@@ -19,7 +19,6 @@ package de.bund.bva.isyfact.util.text;
 import org.junit.Test;
 
 import javax.naming.CompositeName;
-import javax.naming.InvalidNameException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -91,10 +90,9 @@ public class TestRecursiveToStringBuilder {
 
     @Test
     public void testGenericObject() {
-        MessageSourceMessageProvider generic = new MessageSourceMessageProvider();
+        Object generic = new Object();
         String result = RecursiveToStringBuilder.recursiveToString(generic);
-        assertTrue(
-                result.startsWith("de.bund.bva.isyfact.util.text.MessageSourceMessageProvider"));
+        assertTrue(result.startsWith("java.lang.Object"));
     }
 
     @Test
