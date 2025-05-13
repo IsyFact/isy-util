@@ -1,6 +1,5 @@
 package de.bund.bva.isyfact.util.persistence.usertype;
 
-
 import de.bund.bva.isyfact.util.text.FehlerSchluessel;
 import de.bund.bva.isyfact.util.persistence.annotation.PersistentValue;
 import jakarta.persistence.PersistenceException;
