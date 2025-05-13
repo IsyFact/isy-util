@@ -1,15 +1,15 @@
 package de.bund.bva.isyfact.util.usertype;
 
-import de.bund.bva.isyfact.util.persistence.usertype.EnumWithIdUserType;
-import jakarta.persistence.PersistenceException;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import jakarta.persistence.PersistenceException;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import de.bund.bva.isyfact.util.persistence.usertype.EnumWithIdUserType;
 
 public class EnumWithIdUserTypeTest {
 

@@ -1,9 +1,9 @@
 package de.bund.bva.isyfact.util.persistence.usertype;
 
-import de.bund.bva.isyfact.util.persistence.annotation.EnumId;
-import jakarta.persistence.PersistenceException;
-import org.hibernate.usertype.ParameterizedType;
-import org.hibernate.usertype.UserType;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTER_STRING;
+import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG;
+import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -11,10 +11,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-import static de.bund.bva.isyfact.util.text.FehlerSchluessel.FALSCHE_ENUM_KONFIGURATION;
-import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTER_STRING;
-import static de.bund.bva.isyfact.util.text.FehlerSchluessel.UNBEKANNTE_AUSPRAEGUNG;
-import static de.bund.bva.isyfact.util.text.MessageProvider.createMessage;
+import jakarta.persistence.PersistenceException;
+
+import org.hibernate.usertype.ParameterizedType;
+import org.hibernate.usertype.UserType;
+
+import de.bund.bva.isyfact.util.persistence.annotation.EnumId;
 
 /**
  * Ein {@link UserType} zur Persistierung von Enumtypen, die einen Schlüssel enthalten, als String, d.h. in

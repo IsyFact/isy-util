@@ -1,13 +1,13 @@
 package de.bund.bva.isyfact.util.persistence.usertype;
 
-import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SharedSessionContractImplementor;
-import org.hibernate.usertype.UserType;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+
+import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.hibernate.usertype.UserType;
 
 /**
  * Abstract {@link UserType} for any immutable attributes that are persisted as a string in a VARCHAR column.

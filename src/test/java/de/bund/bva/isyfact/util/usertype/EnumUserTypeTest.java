@@ -1,21 +1,19 @@
 package de.bund.bva.isyfact.util.usertype;
 
-import de.bund.bva.isyfact.util.persistence.usertype.EnumUserType;
-import jakarta.persistence.PersistenceException;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import jakarta.persistence.PersistenceException;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import de.bund.bva.isyfact.util.persistence.usertype.EnumUserType;
 
 public class EnumUserTypeTest {
 

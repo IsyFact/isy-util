@@ -1,11 +1,5 @@
 package de.bund.bva.isyfact.util.logging;
 
-import junit.framework.TestCase;
-import org.slf4j.Marker;
-
-import java.util.List;
-import java.util.stream.StreamSupport;
-
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.DATENTYP;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.KATEGORIE;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.KATEGORIE_JOURNAL;
@@ -17,6 +11,13 @@ import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createKateg
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createMarker;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createSchluesselMarker;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.getKSDMarker;
+
+import java.util.List;
+import java.util.stream.StreamSupport;
+
+import org.slf4j.Marker;
+
+import junit.framework.TestCase;
 
 public class CombinedMarkerFactoryTest extends TestCase {
     private final static String SCHLUESSEL_TEST = "SCHLUESSEL_TEST";
