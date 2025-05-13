@@ -1,9 +1,9 @@
 package de.bund.bva.isyfact.util.text;
 
+import static java.text.MessageFormat.format;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import static java.text.MessageFormat.format;
 
 /**
  * Creates formatted messages, using the provided message bundle and keys.

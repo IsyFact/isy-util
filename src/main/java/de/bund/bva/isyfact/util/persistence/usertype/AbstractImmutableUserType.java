@@ -1,9 +1,9 @@
 package de.bund.bva.isyfact.util.persistence.usertype;
 
-import org.hibernate.usertype.UserType;
-
 import java.io.Serializable;
 import java.util.Objects;
+
+import org.hibernate.usertype.UserType;
 
 /**
  * Abstract {@link UserType} for any immutable attributes.
