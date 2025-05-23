@@ -1,8 +1,14 @@
-= Nutzungsvorgaben Isy Util: Inhalt
+= Nutzungsvorgaben Util
 
-// tag::inhalt[]
+include::partial$library.adoc[]
+
+Die Bibliothek `isy-util` bietet nützliche Hilfsmittel, die von den Anwendungen der IsyFact genutzt werden können.
+Es handelt sich dabei um kleinere Utility-Klassen, welche die Implementierung vereinfachen.
+Diese werden im Folgenden überblicksartig beschrieben.
+Details sind den JavaDoc der einzelnen Klassen zu entnehmen.
+
 [[aufbau-von-isy-util]]
-== Aufbau von isy-util
+== Aufbau von `isy-util`
 
 [[package-logging]]
 === Package logging
@@ -23,84 +29,74 @@ Das Package `text` enthält Werkzeuge für die Erzeugung standardisierter Ausgab
 === Package persistence
 Das Package `de.bund.bva.isyfact.util.persistence` enthält unterstützende Klassen für den Umgang mit Datenbanken:
 
-* Das Unterpaket `datasource` enthält die Klasse `DataSourceCheck' , mit der Datenbaktabelle auf die richtige Schema-Version geprüft werden kann. Mit der Klasse `ApplicationRunnerDbSchemaCheck` kann diese Prüfung beim Start einer Spring-Anwendung automatisiert werden.
+* Das Unterpaket `datasource` enthält die Klasse `DataSourceCheck`, mit der Datenbanktabellen auf die richtige Schema-Version geprüft werden können.
+Mit der Klasse `ApplicationRunnerDbSchemaCheck` kann diese Prüfung beim Start einer Spring-Anwendung automatisiert werden.
 
 * Die Unterpakete `annotation` und `usertype` enthalten Klassen zum Umgang mit Enum-Entitäten.
 
 [[nutzung-von-isy-util]]
-== Die Utility-Klassen von isy-util
+== Utility-Klassen von `isy-util`
 
 [[logging]]
 === Logging-Marker
 
-Mit Hilfe der statischen Methoden aus der `CombinedMarkerFactory` können Standard-Log_Ausgaben aus `slf4j` markiert werden.
+Mithilfe der statischen Methoden aus der `CombinedMarkerFactory` können Standard-Log-Ausgaben aus `slf4j` markiert werden.
 
-.Markierung einer Log-Ausgabe mit Hilfe der Methode `CombinedMarkerFactory.createSchluesselMarker`
+.Markierung einer Log-Ausgabe
 [source,java]
 [[anwendung-markerfactory]]
 ----
-import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createSchluesselMarker;
+class Demo {
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-class Demo{
-
-    void demo(){
+    void demo() {
         Logger logger = LoggerFactory.getLogger(Demo.class);
         logger.info(createSchluesselMarker("SCHLUESSEL"),"Diese Info-Nachricht ist mit dem Wert aus SCHLUESSEL markiert");
     }
+
 }
-
-
-
 ----
-
 
 [[persistence-datasource]]
 === Datasource-Check
 
-Eine Anfrage mit dem `DataSourceCheck`erfolgt über eine der  Methoden `checkSchemaVersionCriticalDataSource` oder `checkSchemaVersionNonCriticalDataSource`. Beide Methoden liefern ein `boolean` zurück, auf das die Applikation entsprechend regieren kann:
+Eine Anfrage mit dem `DataSourceCheck` erfolgt über eine der Methoden `checkSchemaVersionCriticalDataSource` oder `checkSchemaVersionNonCriticalDataSource`.
+Beide Methoden liefern ein `boolean` zurück, auf das die Applikation entsprechend regieren kann.
 
-.Durchführung einer Schema-Prüfung
 [[datasource-check]]
+.Durchführung einer Schema-Prüfung
 [source,java]
 ----
-
-import de.bund.bva.isyfact.util.persistence.datasource.DataSourceCheck;import java.sql.SQLException;import static de.bund.bva.isyfact.util.persistence.datasource.DataSourceCheck.checkSchemaVersionCriticalDatasource;
-
-class Demo{
+class Demo {
     void startUp(DataSource dataSource, String version) {
         DataSourceCheck dsc = new DataSourceCheck();
-        if(!dsc.checkSchemaVersionCriticalDatasource(dataSource, version) ){
+        if(!dsc.checkSchemaVersionCriticalDatasource(dataSource, version)){
             // handle errors, do logging etc
         }
     }
 }
 ----
 
-Voraussetzung ist die Existenz einer Datenbank-Tabelle, die die aktuelle Schema-Version enthält. Der DatabaseSchemaCheck fragt die Tabelle mit einem voreingestellten SQL-Statement ab:
+Voraussetzung ist die Existenz einer Datenbank-Tabelle, die die aktuelle Schema-Version enthält.
+Der `DataSourceCheck` fragt die Tabelle mit einem voreingestellten SQL-Statement ab.
 
-
-.Abfrage der Schema-Version-Tabelle (Standard)
 [[check-sql]]
+.Abfrage der Schema-Version-Tabelle (Standard)
 [source,sql]
 ----
 SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'
 ----
 
-Andere Formen der Schema-Tabelle können ebenfalls verwendet werden. In diesem Fall muss bei der Erzeugung das DatabaseSchemaCheck die geeignete SQL-Abfrage als Parameter angegeben werden.
+Andere Formen der Schema-Tabelle können ebenfalls verwendet werden.
+In diesem Fall muss bei der Erzeugung das `DataSourceCheck` die geeignete SQL-Abfrage als Parameter angegeben werden.
 
-
-Für Anwendungen unter `Spring` existiert der Wrapper `ApplicationRunnerDbSchemaCheck`, der als Spring-Komponente hinzugefügt wird und als Implementierung eines `ApplicationRunner` nach vollständiger Initialisierung der Spring-Anwendung den Check automatisch durchführt.
+Für Spring-Anwendungen existiert der Wrapper `ApplicationRunnerDbSchemaCheck`, der als Spring-Komponente hinzugefügt wird und als Implementierung eines `ApplicationRunner` nach vollständiger Initialisierung der Spring-Anwendung den Check automatisch durchführt.
 
 
 [[enum-variablen]]
 === Enum-Variablen und Annotations
 
 Zum vereinfachten Umgang mit Enum-Variablen im Zusammenhang mit Datenbanken steht die Annotation `PersistentValue` zur
-Verfügung:
-
+Verfügung.
 
 [[definition-enumusertype]]
 [source,java]
@@ -119,8 +115,8 @@ public enum Richtung {
 
 Die Klasse `EnumWithIdUserType` erlaubt die Persistierung von Enums, die einen fachlichen Schlüssel besitzen.
 
-.Definition eines Enums zur Verwendung mit `EnumWithIdUserType`
 [[definition-enumwithidusertype]]
+.Definition eines Enums zur Verwendung mit `EnumWithIdUserType`
 [source,java]
 ----
 public enum RichtungMitId {
@@ -145,8 +141,8 @@ public enum RichtungMitId {
 
 Das folgende Beispiel zeigt die Verwendung dieser Enums in einer Entität.
 
-.Verwendung von Enums in Entitäten
 [[verwendung-enum-in-entitaeten]]
+.Verwendung von Enums in Entitäten
 [source,java]
 ----
 @Entity
@@ -164,6 +160,3 @@ public class MyEntity {
 
 }
 ----
-
-
-// end::inhalt[]
