@@ -1,9 +1,0 @@
-= Konzept Util: Einleitung
-
-// tag::inhalt[]
-[[einleitung]]
-== Einleitung
-
-Das Paket `isy-util` besteht aus einer Sammlung von Klassen und Methoden, die einerseits thematisch nicht zusammengefasst werden können, andererseits aber für viele andere Pakete nützlich sind.
-
-// end::inhalt[]

@@ -1,7 +1,6 @@
-name: isy-util-doc
-title: isy-util
-version: '5.0.0 SNAPSHOT'
-display_version: '5.0.0 SNAPSHOT'
-start_page: ROOT:konzept/master.adoc
+name: util
+title: Baustein Util
+prerelease: '(DEV)'
+start_page: ROOT:konzept.adoc
 nav:
 - modules/ROOT/nav.adoc
