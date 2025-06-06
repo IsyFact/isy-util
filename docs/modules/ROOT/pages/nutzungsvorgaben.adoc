@@ -59,6 +59,12 @@ class Demo {
 [[persistence-datasource]]
 === Datasource-Check
 
+[IMPORTANT]
+====
+Die hier beschriebenen Klassen bewahren die Abwärtskompatibilität zur ehemals in der IsyFact vorhandenen Schema-Versionierung in Form einer Eigenentwicklung.
+Die aktuelle Version der IsyFact-Referenzarchitektur empfiehlt hingehen den Einsatz von xref:isyfact-standards-doku:referenzarchitektur:software-technisch/backend/persistenzschicht.adoc#versionierung[Liquibase].
+====
+
 Eine Anfrage mit dem `DataSourceCheck` erfolgt über eine der Methoden `checkSchemaVersionCriticalDataSource` oder `checkSchemaVersionNonCriticalDataSource`.
 Beide Methoden liefern ein `boolean` zurück, auf das die Applikation entsprechend regieren kann.
 
@@ -80,11 +86,38 @@ Voraussetzung ist die Existenz einer Datenbank-Tabelle, die die aktuelle Schema-
 Der `DataSourceCheck` fragt die Tabelle mit einem voreingestellten SQL-Statement ab.
 
 [[check-sql]]
-.Abfrage der Schema-Version-Tabelle (Standard)
+.Abfrage der Schema-Tabelle (Standard)
 [source,sql]
 ----
 SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'
 ----
+
+Der <<check-sql>> liegt eine Tabelle in folgender Gestalt zugrunde.
+
+.Beispielhafte Schema-Tabelle
+[[table-schema-version]]
+[cols="1m,2,3",options="header"]
+|====
+|Spalte
+|Typ
+|Beschreibung
+
+|version_nummer
+|Zeichenkette (25 Zeichen)
+|Versionsnummer des Datenbankschemas.
+Diese Versionsnummer entspricht der Versionsnummer der Anwendung, mit der sich das Schema geändert hat.
+
+|update_nummer
+|Zeichenkette (5 Zeichen)
+|Update-Zähler, der jedes Mal hochgezählt wird, wenn sich das Datenbankschema ändert, aber die Anwendung unverändert bleibt.
+
+|status
+| Zeichenkette (25 Zeichen)
+a|
+`gueltig`:: Das Schema wurde korrekt installiert bzw. aktualisiert und kann verwendet werden.
+`ungueltig`:: Das Schema befindet sich im Aufbau bzw. in der Änderung oder die Installation wurde nur teilweise durchgeführt und wurde mit Fehlern abgebrochen.
+Das Schema kann nicht verwendet werden und muss überprüft werden.
+|====
 
 Andere Formen der Schema-Tabelle können ebenfalls verwendet werden.
 In diesem Fall muss bei der Erzeugung das `DataSourceCheck` die geeignete SQL-Abfrage als Parameter angegeben werden.

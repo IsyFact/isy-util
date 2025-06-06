@@ -5,6 +5,7 @@
 - keine
 
 ### Umgesetzte Tickets
+- `IFS-4736`: Übernahme von Inhalten zur manuellen Schema-Prüfung aus dem aufgelösten Baustein JPA/Hibernate
 - `IFS-4575`: Portierung fehlender Tickets aus isy-standards
     - `ISY-1025`: Entfernen der JUnit Enginge Test Dependency
     - `IFS-4367`: Entfernen des Serviceproviders
@@ -13,7 +14,8 @@
 - keine
 
 #### Interne Anpassungen
-- keine
+- `IFS-4713`: Dokumentation mit Stand aus `isyfact-standards` zusammengeführt und technische Schulden behoben.
+- `IFS-4714`: Zentrale Versionierung eingeführt.
 
 ### Durchzuführende Aktionen vor dem ersten Einsatz
 - keine
