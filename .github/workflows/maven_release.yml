@@ -18,7 +18,7 @@ jobs:
       jdk-version: 21
       version: ${{ github.ref_name }}
       maven-opts: '-P centralRelease'
-      deploy-server-id: ossrh
+      deploy-server-id: central
       sbom: true
       sign: true
       environment: 'Release'
