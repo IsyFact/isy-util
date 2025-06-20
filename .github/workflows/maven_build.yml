@@ -33,14 +33,16 @@ jobs:
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   DeploySnapshotRcVersion:
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/release/'))
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') &&
+      (github.ref == 'refs/heads/develop' || startsWith(github.ref, 'refs/heads/release/'))
     needs: [MavenBuild, Version]
-    uses: IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml@v1.6.0
+    #uses: IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml@v1.6.0
+    uses: IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml@feature/IFS-4717_change_to_central_sonatype_url
     with:
       version: ${{ needs.Version.outputs.next-version }}
       jdk-version: 21
-      maven-opts: '-DaltDeploymentRepository=ossrh::default::https://central.sonatype.org/content/repositories/snapshots/'
-      deploy-server-id: ossrh
+      maven-opts: '-DaltDeploymentRepository=central::default::https://central.sonatype.com/repository/maven-snapshots/'
+      deploy-server-id: central
       sbom: ${{ startsWith(github.ref, 'refs/heads/release/') }}
       sign: true
       environment: 'Release'
