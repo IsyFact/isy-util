@@ -41,6 +41,7 @@ jobs:
     with:
       version: ${{ needs.Version.outputs.next-version }}
       jdk-version: 21
+      maven-opts: '-PcentralRelease'
       deploy-server-id: central
       sbom: ${{ startsWith(github.ref, 'refs/heads/release/') }}
       sign: true
