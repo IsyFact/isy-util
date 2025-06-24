@@ -41,7 +41,6 @@ jobs:
     with:
       version: ${{ needs.Version.outputs.next-version }}
       jdk-version: 21
-      maven-opts: '-DaltDeploymentRepository=central::default::https://central.sonatype.com/repository/maven-snapshots/'
       deploy-server-id: central
       sbom: ${{ startsWith(github.ref, 'refs/heads/release/') }}
       sign: true
