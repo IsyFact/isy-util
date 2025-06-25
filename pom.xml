@@ -48,7 +48,6 @@
 
         <maven.surefire.version>3.1.2</maven.surefire.version>
         <maven.jar.version>3.3.0</maven.jar.version>
-        <maven.deploy.version>2.8.2</maven.deploy.version>
         <maven.flatten.version>1.2.7</maven.flatten.version>
         <maven.jacoco.version>0.8.12</maven.jacoco.version>
         <maven.cyclondx.version>2.7.11</maven.cyclondx.version>
@@ -265,11 +264,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>${maven.deploy.version}</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
