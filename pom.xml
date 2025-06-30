@@ -70,7 +70,7 @@
             <id>central-releases</id>
             <url>https://central.sonatype.com/</url>
             <snapshots>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </snapshots>
         </repository>
     </repositories>
