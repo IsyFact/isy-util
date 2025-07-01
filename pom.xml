@@ -40,6 +40,8 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <maven.compiler.version>3.11.0</maven.compiler.version>
+        <maven-enforcer-plugin.version>3.6.0</maven-enforcer-plugin.version>
+        <enforced.maven.version>[3.6.3,4)</enforced.maven.version>
 
         <spring-boot.version>3.4.5</spring-boot.version>
 
@@ -49,7 +51,7 @@
         <maven.surefire.version>3.1.2</maven.surefire.version>
         <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
         <maven.jar.version>3.3.0</maven.jar.version>
-        <maven.flatten.version>1.2.7</maven.flatten.version>
+        <maven.flatten.version>1.7.1</maven.flatten.version>
         <maven.jacoco.version>0.8.12</maven.jacoco.version>
         <maven.cyclondx.version>2.7.11</maven.cyclondx.version>
         <maven.javadoc.plugin.version>3.3.2</maven.javadoc.plugin.version>
@@ -150,6 +152,27 @@
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-enforcer-plugin</artifactId>
+                    <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-maven</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <requireMavenVersion>
+                                        <version>${enforced.maven.version}</version>
+                                    </requireMavenVersion>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
 
                 <plugin>
@@ -302,6 +325,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
