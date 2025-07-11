@@ -1,14 +1,16 @@
 package de.bund.bva.isyfact.util.persistence.datasource;
 
-import de.bund.bva.isyfact.util.logging.CombinedMarkerFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import de.bund.bva.isyfact.util.logging.CombinedMarkerFactory;
 
 /**
  * Utility class for checks of data sources.

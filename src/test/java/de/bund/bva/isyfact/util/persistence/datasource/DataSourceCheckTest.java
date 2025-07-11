@@ -1,17 +1,19 @@
 package de.bund.bva.isyfact.util.persistence.datasource;
 
-import junit.framework.TestCase;
-import org.mockito.Mockito;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
+import javax.sql.DataSource;
+
+import org.mockito.Mockito;
+
+import junit.framework.TestCase;
 
 
 public class DataSourceCheckTest extends TestCase {

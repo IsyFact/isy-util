@@ -1,9 +1,9 @@
 package de.bund.bva.isyfact.util.logging;
 
+import java.util.Arrays;
+
 import org.slf4j.Marker;
 import org.slf4j.MarkerFactory;
-
-import java.util.Arrays;
 
 
 /**
