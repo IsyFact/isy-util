@@ -6,3 +6,4 @@
 - `IFS-4575`: Portierung fehlender Tickets aus isy-standards
   - `ISY-1025`: Entfernen der JUnit Engine-Testdependency
   - `IFS-4367`: Entfernen des Serviceproviders 
+- `IFS-4655`: Update von Maven Checkstyle Plugin auf Version 3.6.0
