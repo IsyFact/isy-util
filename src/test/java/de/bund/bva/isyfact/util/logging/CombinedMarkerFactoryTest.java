@@ -11,20 +11,23 @@ import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createKateg
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createMarker;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.createSchluesselMarker;
 import static de.bund.bva.isyfact.util.logging.CombinedMarkerFactory.getKSDMarker;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
 import java.util.stream.StreamSupport;
 
 import org.slf4j.Marker;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.Test;
 
-public class CombinedMarkerFactoryTest extends TestCase {
+public class CombinedMarkerFactoryTest {
     private final static String SCHLUESSEL_TEST = "SCHLUESSEL_TEST";
     private final static String NAME_TEST = "NAME_TEST";
     private final static String VALUE_TEST = "VALUE_TEST";
 
 
+    @Test
     public void testGetKSDMarker() {
         Marker marker = getKSDMarker(KATEGORIE_JOURNAL, SCHLUESSEL_TEST, TECHNIKDATEN);
         assertTrue(marker.contains(ROOTMARKER));
@@ -36,12 +39,14 @@ public class CombinedMarkerFactoryTest extends TestCase {
         assertTrue(markers.get(2).contains(TECHNIKDATEN));
     }
 
+    @Test
     public void testCreateMarker() {
         Marker marker = createMarker(NAME_TEST, VALUE_TEST);
         assertEquals(NAME_TEST, marker.getName());
         assertTrue(marker.contains(VALUE_TEST));
     }
 
+    @Test
     public void testCreateKategorieMarker() {
         Marker marker = createKategorieMarker(VALUE_TEST);
         assertTrue(marker.contains(ROOTMARKER));
@@ -50,6 +55,7 @@ public class CombinedMarkerFactoryTest extends TestCase {
         assertTrue(childMMarker.contains(VALUE_TEST));
     }
 
+    @Test
     public void testCreateSchluesselMarker() {
         Marker marker = createSchluesselMarker(VALUE_TEST);
         assertTrue(marker.contains(ROOTMARKER));
@@ -58,6 +64,7 @@ public class CombinedMarkerFactoryTest extends TestCase {
         assertTrue(childMMarker.contains(VALUE_TEST));
     }
 
+    @Test
     public void testCreateDatentypMarker() {
         Marker marker = createDatentypMarker(VALUE_TEST);
         assertTrue(marker.contains(ROOTMARKER));
