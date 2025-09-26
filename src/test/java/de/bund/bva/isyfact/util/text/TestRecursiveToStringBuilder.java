@@ -1,6 +1,6 @@
 package de.bund.bva.isyfact.util.text;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import javax.naming.CompositeName;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestRecursiveToStringBuilder {
 

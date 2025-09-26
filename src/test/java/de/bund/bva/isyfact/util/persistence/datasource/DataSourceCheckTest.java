@@ -1,7 +1,6 @@
 package de.bund.bva.isyfact.util.persistence.datasource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -15,16 +14,18 @@ import javax.sql.DataSource;
 
 import org.mockito.Mockito;
 
-import junit.framework.TestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 
-public class DataSourceCheckTest extends TestCase {
+public class DataSourceCheckTest {
     DataSource dataSource = Mockito.mock(DataSource.class);
     Connection connection = Mockito.mock(Connection.class);
     PreparedStatement statement = Mockito.mock(PreparedStatement.class);
     ResultSet resultSet = Mockito.mock(ResultSet.class);
 
 
+    @BeforeEach
     public void setUp() throws SQLException {
         when(dataSource.getConnection()).thenReturn(connection);
         when(connection.prepareStatement(anyString())).thenReturn(statement);
@@ -32,6 +33,7 @@ public class DataSourceCheckTest extends TestCase {
         when(resultSet.next()).thenReturn(true);
     }
 
+    @Test
     public void testGetSchemaVersion() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -41,15 +43,17 @@ public class DataSourceCheckTest extends TestCase {
         assertEquals(expected, version);
     }
 
+    @Test
     public void testGetSchemaVersionInvalid() throws SQLException {
         String expected = "invalid";
         when(resultSet.next()).thenReturn(false);
 
         DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
         String version = check.getSchemaVersion(dataSource, "");
-        assertThat(version).isEqualTo(expected);
+        assertEquals(expected, version);
     }
 
+    @Test
     public void testCheckSchemaVersionCriticalDataSourceTrue() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -59,7 +63,8 @@ public class DataSourceCheckTest extends TestCase {
         assertTrue(ok);
     }
 
-   public void testCheckSchemaVersionCriticalDataSourceFalse() throws SQLException {
+    @Test
+    public void testCheckSchemaVersionCriticalDataSourceFalse() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
 
@@ -69,6 +74,7 @@ public class DataSourceCheckTest extends TestCase {
     }
 
 
+    @Test
     public void testCheckSchemaVersionNonCriticalDataSourceTrue() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -78,6 +84,7 @@ public class DataSourceCheckTest extends TestCase {
         assertTrue(ok);
     }
 
+    @Test
     public void testCheckSchemaVersionNonCriticalDataSourceFalse() throws SQLException {
         String expected = "47.11";
         when(resultSet.getString(anyInt())).thenReturn(expected);
@@ -87,6 +94,7 @@ public class DataSourceCheckTest extends TestCase {
         assertFalse(ok);
     }
 
+    @Test
     public void testCheckSchemaVersionCriticalDataSource_sqlException() throws SQLException {
         when(resultSet.getString(anyInt())).thenThrow(new SQLException("Testing an Exception"));
 
@@ -94,6 +102,7 @@ public class DataSourceCheckTest extends TestCase {
         assertThrows(RuntimeException.class, () -> check.checkSchemaVersionCriticalDataSource(dataSource, "0"));
     }
 
+    @Test
     public void testCheckSchemaVersionNonCriticalDataSource_sqlException() throws SQLException {
         when(resultSet.getString(anyInt())).thenThrow(new SQLException("Testing an Exception"));
 
