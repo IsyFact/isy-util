@@ -1,13 +1,13 @@
 package de.bund.bva.isyfact.util.usertype;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Properties;
 
 import jakarta.persistence.PersistenceException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.bund.bva.isyfact.util.persistence.usertype.EnumWithIdUserType;
 
@@ -15,7 +15,7 @@ public class EnumWithIdUserTypeTest {
 
     private EnumWithIdUserType userType;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         userType = new EnumWithIdUserType();
     }
@@ -44,51 +44,64 @@ public class EnumWithIdUserTypeTest {
         assertEquals(Vermerkstyp.NACHRICHT_EMPFANGEN, userType.convertStringToInstance(sollId));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetEnumClassZweiIdGetter() {
-        userType.setEnumClass(DuplicateIdGetterEnum.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(DuplicateIdGetterEnum.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetEnumClassKeinIdGetter() {
-        userType.setEnumClass(Vorgangsstatus.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(Vorgangsstatus.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetEnumClassDuplictaeKey() {
-        userType.setEnumClass(DuplicatePersistentValueEnum.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(DuplicatePersistentValueEnum.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertStringToInstanceFalscheId() {
-        userType.setEnumClass(Vermerkstyp.class);
-        userType.convertStringToInstance("C");
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(Vermerkstyp.class);
+            userType.convertStringToInstance("C");
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertInstanceToStringFalscheId() {
-        userType.setEnumClass(WrongIdEnum.class);
-        userType.convertInstanceToString(WrongIdEnum.A);
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(WrongIdEnum.class);
+            userType.convertInstanceToString(WrongIdEnum.A);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesEnumClassNotSet() {
-        Properties prop = new Properties();
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesEnumClassNotEnum() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", Object.class.getName());
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", Object.class.getName());
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesEnumClassNotFound() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", "ObjectA");
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", "ObjectA");
+            userType.setParameterValues(prop);
+        });
     }
 
     @Test

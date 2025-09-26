@@ -1,6 +1,6 @@
 package de.bund.bva.isyfact.util.usertype;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import java.sql.PreparedStatement;
@@ -10,8 +10,8 @@ import java.util.Properties;
 
 import jakarta.persistence.PersistenceException;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import de.bund.bva.isyfact.util.persistence.usertype.EnumUserType;
 
@@ -19,7 +19,7 @@ public class EnumUserTypeTest {
 
     private EnumUserType userType;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         userType = new EnumUserType();
     }
@@ -33,29 +33,36 @@ public class EnumUserTypeTest {
         assertEquals(Vorgangsstatus.IN_BEARBEITUNG, userType.convertStringToInstance("B"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testSetParameterValuesNull() {
-        userType.setParameterValues(null);
+        assertThrows(NullPointerException.class, () ->
+            userType.setParameterValues(null));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesNoEnumClassSet() {
-        Properties prop = new Properties();
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesKeineEnumClass() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", Object.class.getName());
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", Object.class.getName());
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesKeineKlasse() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", "ObjectA");
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", "ObjectA");
+            userType.setParameterValues(prop);
+        });
     }
 
     @Test
@@ -71,26 +78,32 @@ public class EnumUserTypeTest {
         assertEquals(Vorgangsstatus.IN_BEARBEITUNG, userType.convertStringToInstance("B"));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testKeineAnnotationAnEnumKonstanten() {
-        userType.setEnumClass(Vermerkstyp.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(Vermerkstyp.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testDuplicatePersistentValue() {
-        userType.setEnumClass(DuplicatePersistentValueEnum.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(DuplicatePersistentValueEnum.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertStringToInstanceKeyNotExists() {
-        userType.setEnumClass(Vorgangsstatus.class);
-        userType.convertStringToInstance("");
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(Vorgangsstatus.class);
+            userType.convertStringToInstance("");
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertInstanceToStringObjectNotExists() {
-        userType.setEnumClass(Vorgangsstatus.class);
-        userType.convertInstanceToString(Vermerkstyp.NACHRICHT_EMPFANGEN);
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(Vorgangsstatus.class);
+            userType.convertInstanceToString(Vermerkstyp.NACHRICHT_EMPFANGEN);
+        });
     }
 
     @Test
