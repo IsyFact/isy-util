@@ -1,8 +1,10 @@
 package de.bund.bva.isyfact.util.persistence.datasource;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertThrows;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.when;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +39,15 @@ public class DataSourceCheckTest extends TestCase {
         DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
         String version = check.getSchemaVersion(dataSource, "");
         assertEquals(expected, version);
+    }
+
+    public void testGetSchemaVersionInvalid() throws SQLException {
+        String expected = "invalid";
+        when(resultSet.next()).thenReturn(false);
+
+        DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
+        String version = check.getSchemaVersion(dataSource, "");
+        assertThat(version).isEqualTo(expected);
     }
 
     public void testCheckSchemaVersionCriticalDataSourceTrue() throws SQLException {
@@ -74,5 +85,19 @@ public class DataSourceCheckTest extends TestCase {
         DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
         boolean ok = check.checkSchemaVersionNonCriticalDataSource(dataSource, "0");
         assertFalse(ok);
+    }
+
+    public void testCheckSchemaVersionCriticalDataSource_sqlException() throws SQLException {
+        when(resultSet.getString(anyInt())).thenThrow(new SQLException("Testing an Exception"));
+
+        DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
+        assertThrows(RuntimeException.class, () -> check.checkSchemaVersionCriticalDataSource(dataSource, "0"));
+    }
+
+    public void testCheckSchemaVersionNonCriticalDataSource_sqlException() throws SQLException {
+        when(resultSet.getString(anyInt())).thenThrow(new SQLException("Testing an Exception"));
+
+        DataSourceCheck check = new DataSourceCheck("SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'");
+        assertThrows(RuntimeException.class, () -> check.checkSchemaVersionNonCriticalDataSource(dataSource, "0"));
     }
 }
