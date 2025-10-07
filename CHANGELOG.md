@@ -7,6 +7,11 @@
   - `ISY-1025`: Entfernen der JUnit Engine-Testdependency
   - `IFS-4367`: Entfernen des Serviceproviders 
 
+### BUG FIXES
+- `IFS-4730`: Standardwert für den Konfigurationsparameter `db.schema.version` geändert.
+  - alter Wert: `"${db.schema.version}"`
+  - neuer Wert: `null`
+
 ### DEPENDENCY UPGRADES
 - `IFS-4655`: Update von Maven Checkstyle Plugin auf Version 3.6.0
 - `IFS-4531`: Update von Flatten Maven Plugin auf Version 1.7.1
