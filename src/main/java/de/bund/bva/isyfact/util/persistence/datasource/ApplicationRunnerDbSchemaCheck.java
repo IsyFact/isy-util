@@ -21,7 +21,7 @@ public class ApplicationRunnerDbSchemaCheck implements ApplicationRunner {
     /**
      * The used logger.
      */
-    private final static Logger LOG = LoggerFactory.getLogger(ApplicationRunnerDbSchemaCheck.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ApplicationRunnerDbSchemaCheck.class);
     /**
      * Data source, provided at startup.
      */
@@ -38,7 +38,7 @@ public class ApplicationRunnerDbSchemaCheck implements ApplicationRunner {
      * @param schemaVersion The schema version from application properties
      */
     @Autowired
-    public ApplicationRunnerDbSchemaCheck(DataSource dataSource, @Value("${db.schema.version}") String schemaVersion) {
+    public ApplicationRunnerDbSchemaCheck(DataSource dataSource, @Value("${db.schema.version:#{null}}") String schemaVersion) {
         this.dataSource = dataSource;
         this.schemaVersion = schemaVersion;
     }
@@ -50,7 +50,7 @@ public class ApplicationRunnerDbSchemaCheck implements ApplicationRunner {
      * @throws Exception An error has occurred.
      */
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         LOG.info(CombinedMarkerFactory.createMarker(CombinedMarkerFactory.KATEGORIE, CombinedMarkerFactory.KATEGORIE_JOURNAL),
                 "Starte initiale Überprüfungen.");
         if (schemaVersion != null) {
