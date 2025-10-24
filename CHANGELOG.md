@@ -6,6 +6,7 @@
 - `IFS-4575`: Portierung fehlender Tickets aus isy-standards
   - `ISY-1025`: Entfernen der JUnit Engine-Testdependency
   - `IFS-4367`: Entfernen des Serviceproviders 
+- `IFS-4583`: Wiedereinführung der Quality-Gates
 
 ### BUG FIXES
 - `IFS-4730`: Standardwert für den Konfigurationsparameter `db.schema.version` geändert.
