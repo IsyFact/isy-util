@@ -64,10 +64,10 @@ public class RecursiveToStringBuilder {
         seen.add(o);
         if (o.getClass().isArray()) {
             appendArray(prefix, o, buffer, seen);
-        } else if (o instanceof Map) {
-            appendMap(prefix, (Map<?, ?>) o, buffer, seen);
-        } else if (o instanceof Iterable) {
-            appendIterable(prefix, (Iterable<?>) o, buffer, seen);
+        } else if (o instanceof Map<?, ?> map) {
+            appendMap(prefix, map, buffer, seen);
+        } else if (o instanceof Iterable<?> iterable) {
+            appendIterable(prefix, iterable, buffer, seen);
         } else if (shouldNotRecurse(o)) {
             buffer.append(o);
             buffer.append('\n');
@@ -252,7 +252,7 @@ public class RecursiveToStringBuilder {
                     && !Object.class.getMethod("toString").equals(o.getClass().getMethod("toString"));
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
-        } catch (Throwable t) {
+        } catch (Throwable _) {
             return true;
         }
     }
