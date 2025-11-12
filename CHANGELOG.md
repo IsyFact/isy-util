@@ -8,6 +8,9 @@
   - `IFS-4367`: Entfernen des Serviceproviders 
 - `IFS-4583`: Wiedereinführung der Quality-Gates
 
+### BREAKING CHANGES
+- `IFS-4922`: Aktualisierung von Java 17 auf 25
+
 ### BUG FIXES
 - `IFS-4730`: Standardwert für den Konfigurationsparameter `db.schema.version` geändert.
   - alter Wert: `"${db.schema.version}"`
