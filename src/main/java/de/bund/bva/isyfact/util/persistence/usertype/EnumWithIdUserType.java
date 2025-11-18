@@ -137,7 +137,7 @@ public class EnumWithIdUserType extends AbstractImmutableStringUserType implemen
             @SuppressWarnings("unchecked")
             Class<? extends Enum<?>> enumClazz = (Class<? extends Enum<?>>) clazz;
             setEnumClass(enumClazz);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException _) {
             throw new PersistenceException(createMessage(FALSCHE_ENUM_KONFIGURATION, "Enum-Klasse "
                     + enumClassName + " nicht gefunden"));
         }

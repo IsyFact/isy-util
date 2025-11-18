@@ -34,7 +34,7 @@ public class CombinedMarkerFactoryTest {
         Iterable<Marker> iterable = marker::iterator;
         List<Marker> markers = StreamSupport.stream(iterable.spliterator(), false).toList();
         assertEquals(3, markers.size());
-        assertTrue(markers.get(0).contains(KATEGORIE_JOURNAL));
+        assertTrue(markers.getFirst().contains(KATEGORIE_JOURNAL));
         assertTrue(markers.get(1).contains(SCHLUESSEL_TEST));
         assertTrue(markers.get(2).contains(TECHNIKDATEN));
     }
