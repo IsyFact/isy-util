@@ -18,6 +18,12 @@
 
 ### DEPENDENCY UPGRADES
 - Update org.apache.maven.plugins:maven-jar-plugin von Version 3.3.0 auf 3.5.0
+- Update IsyFact/isy-github-actions-templates/.github/workflows/docs_build_template.yml von Version 2.1.0 auf 2.1.1
+- Update IsyFact/isy-github-actions-templates/.github/workflows/maven_create_release_template.yml von Version 2.0.0 auf 2.1.1
+- Update IsyFact/isy-github-actions-templates/.github/workflows/maven_build_template.yml von Version 2.0.0 auf 2.1.1
+- Update IsyFact/isy-github-actions-templates/.github/workflows/next_version.yml von Version 2.0.0 auf 2.1.1
+- Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml von Version 1.8.0 auf 2.1.1
+- Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.1 auf 4.9.8.2
 - `IFS-4655`: Update von Maven Checkstyle Plugin auf Version 3.6.0
 - `IFS-4531`: Update von Flatten Maven Plugin auf Version 1.7.1
     * Hinzufügen von Maven Enforcer Plugin auf Version 3.6.0
