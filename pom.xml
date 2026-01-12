@@ -42,7 +42,6 @@
 
         <spring-boot.version>3.5.6</spring-boot.version>
 
-        <logback-classic.version>1.5.6</logback-classic.version>
         <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
 
         <maven.surefire.version>3.5.4</maven.surefire.version>
@@ -57,8 +56,6 @@
 
         <isy-checkstyle-config.version>0.2.0</isy-checkstyle-config.version>
         <spotbugs.version>4.9.8.2</spotbugs.version>
-        <junit-jupiter.version>5.12.2</junit-jupiter.version>
-        <assertj-core.version>3.27.4</assertj-core.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -107,13 +104,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>${assertj-core.version}</version>
             <scope>test</scope>
         </dependency>
 
