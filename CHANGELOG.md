@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.1 auf 4.9.8.2
 - `IFS-4655`: Update von Maven Checkstyle Plugin auf Version 3.6.0
 - `IFS-4531`: Update von Flatten Maven Plugin auf Version 1.7.1
     * Hinzufügen von Maven Enforcer Plugin auf Version 3.6.0
