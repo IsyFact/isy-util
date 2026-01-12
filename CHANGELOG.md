@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update org.sonatype.central:central-publishing-maven-plugin von Version 0.8.0 auf 0.10.0
 - Update net.logstash.logback:logstash-logback-encoder von Version 8.0 auf 8.1
 - Update org.apache.maven.plugins:maven-jar-plugin von Version 3.3.0 auf 3.5.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/docs_build_template.yml von Version 2.1.0 auf 2.1.1
