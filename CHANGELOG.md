@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update org.apache.maven.plugins:maven-source-plugin von Version 3.2.1 auf 3.4.0
 - Update org.apache.maven.plugins:maven-enforcer-plugin von Version 3.6.0 auf 3.6.2
 - Update org.sonatype.central:central-publishing-maven-plugin von Version 0.8.0 auf 0.10.0
 - Update net.logstash.logback:logstash-logback-encoder von Version 8.0 auf 8.1
