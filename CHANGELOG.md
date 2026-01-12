@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update org.apache.maven.plugins:maven-jar-plugin von Version 3.3.0 auf 3.5.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/docs_build_template.yml von Version 2.1.0 auf 2.1.1
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_create_release_template.yml von Version 2.0.0 auf 2.1.1
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_build_template.yml von Version 2.0.0 auf 2.1.1
