@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update org.springframework.boot:spring-boot-dependencies von Version 3.5.6 auf 3.5.9
 - Update org.apache.maven.plugins:maven-gpg-plugin von Version 3.0.1 auf 3.2.8
 - Update org.codehaus.mojo:flatten-maven-plugin von Version 1.7.1 auf 1.7.3
 - Update org.apache.maven.plugins:maven-source-plugin von Version 3.2.1 auf 3.4.0
