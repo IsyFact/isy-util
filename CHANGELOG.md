@@ -17,6 +17,7 @@
   - neuer Wert: `null`
 
 ### DEPENDENCY UPGRADES
+- Update IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml von Version 2.0.0 auf 2.1.1
 - Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_merge_template.yml von Version 2.0.0 auf 2.1.1
 - Update IsyFact/isy-github-actions-templates/.github/workflows/commit_message_checker_template.yml von Version 2.0.0 auf 2.1.1
 - Update org.springframework.boot:spring-boot-dependencies von Version 3.5.6 auf 3.5.9
