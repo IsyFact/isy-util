@@ -15,6 +15,7 @@
 - `IFS-4730`: Standardwert für den Konfigurationsparameter `db.schema.version` geändert.
   - alter Wert: `"${db.schema.version}"`
   - neuer Wert: `null`
+- `IFS-5038`: Implementierung eigener UserType-Klassen an Hibernate Version 6.x angepasst
 
 ### DEPENDENCY UPGRADES
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_dependency_scan_template.yml von Version 2.0.0 auf 2.1.1
