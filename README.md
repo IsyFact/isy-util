@@ -1,5 +1,6 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-orange)](https://opensource.org/licenses/Apache-2.0)
-![GitHub Sprache](https://img.shields.io/badge/Language-Java_17-orange)
+![GitHub Sprache](https://img.shields.io/badge/Language-Java_25-orange)
+![GitHub Spring Boot](https://img.shields.io/badge/SpringBoot-4.x-green)
 
 
 # isy-util
@@ -39,6 +40,3 @@ Die Dokumentation des Projekts ist unter der Namensnennung 4.0 International ([C
 
 __Vielen Dank für die Verwendung von isy-util!__
 Bei Fragen oder Anmerkungen können Sie uns unter folgender E-Mail-Adresse kontaktieren: [isyfact@bva.bund.de](mailto:isyfact@bva.bund.de)
-
-© 2024 IsyFact
-
