@@ -16,34 +16,49 @@ import de.bund.bva.isyfact.util.logging.CombinedMarkerFactory;
  * Utility class for checks of data sources.
  */
 public class DataSourceCheck {
+
     /**
-     * The used logger
+     * The used logger.
      */
     private final static Logger LOG = LoggerFactory.getLogger(DataSourceCheck.class);
 
+    /**
+     * DB unavailable exception key.
+     */
     private final static String FEHLER_DB_NICHT_VERFUEGBAR = "PERSI00008";
+
+    /**
+     * DB unavailable exception message.
+     */
     private final static String DB_BEIM_HOCHFAHREN_NICHT_VERFUEGBAR = FEHLER_DB_NICHT_VERFUEGBAR +
-            ": Die Version des Datenbankschemas konnte nicht gepr\u00FCft werden. Verbindungen zu diesem Schema sind erst nach einem Neustart wieder verf\u00FCgbar.";
+        ": Die Version des Datenbankschemas konnte nicht gepr\u00FCft werden. Verbindungen zu diesem Schema sind erst nach einem Neustart wieder verf\u00FCgbar.";
+
+    /**
+     * Wrong schema version exception key.
+     */
     private static final String FALSCHE_SCHEMA_VERSION = "EPLPER00001";
 
     /**
-     * Default message to query the data sources schema version.
-     */
-    private String schemaQuery = "SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'";
-
-    /**
-     * Default constructor. Instance will us default schema query.
-     */
-    public DataSourceCheck() {
-    }
-
-    /**
-     * Default constructor with custom schema query.
+     * Checks the schema version.
      *
-     * @param schemaQuery The custom schema query.
+     * @return true, if schema version is ok.
      */
-    public DataSourceCheck(String schemaQuery) {
-        this.schemaQuery = schemaQuery;
+    public boolean checkSchemaVersion(DataSource dataSource, String schemaVersion) {
+        try {
+            String actualSchemaVersion = getSchemaVersion(dataSource, schemaVersion);
+            if (actualSchemaVersion.equals(schemaVersion)) {
+                return true;
+            } else {
+                LOG.warn(
+                    FALSCHE_SCHEMA_VERSION,
+                    "Die Version des Datenbankschemas entspricht nicht der erwarteten Version ( {} ).", schemaVersion
+                );
+                return false;
+            }
+        } catch (SQLException e) {
+            LOG.warn(DB_BEIM_HOCHFAHREN_NICHT_VERFUEGBAR, e);
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -54,8 +69,11 @@ public class DataSourceCheck {
      * @return The actual schema version.
      * @throws SQLException An error has occurred.
      */
-    public String getSchemaVersion(DataSource dataSource, String schemaVersion) throws SQLException {
+    private String getSchemaVersion(DataSource dataSource, String schemaVersion) throws SQLException {
         LOG.info(CombinedMarkerFactory.createMarker(CombinedMarkerFactory.KATEGORIE, CombinedMarkerFactory.KATEGORIE_JOURNAL), "Überprüfung der korrekten Schema-Version {}", schemaVersion);
+
+        String schemaQuery = "SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'";
+
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(schemaQuery)) {
             LOG.debug("Checking version for data source, expected: " + schemaVersion);
@@ -73,58 +91,4 @@ public class DataSourceCheck {
             }
         }
     }
-
-    /**
-     * Checks the  schema version.
-     *
-     * @param dataSource    The data source.
-     * @param schemaVersion The desired schema version.
-     * @return true, if schema version is ok.
-     * @throws SQLException An error has occurred.
-     */
-    private boolean checkSchemaVersion(DataSource dataSource, String schemaVersion) throws SQLException {
-        String actualSchemaVersion = getSchemaVersion(dataSource, schemaVersion);
-        if (actualSchemaVersion.equals(schemaVersion)) {
-            return true;
-        } else {
-            LOG.warn(FALSCHE_SCHEMA_VERSION,
-                    "Die Version des Datenbankschemas entspricht nicht der erwarteten Version ( {} ).", schemaVersion);
-            return false;
-        }
-    }
-
-    /**
-     * Checks the  schema version.
-     *
-     * @param dataSource    The data source.
-     * @param schemaVersion The desired schema version.
-     * @return true, if schema version is ok.
-     */
-    public boolean checkSchemaVersionCriticalDataSource(DataSource dataSource, String schemaVersion) {
-        try {
-            return checkSchemaVersion(dataSource, schemaVersion);
-        } catch (SQLException e) {
-            LOG.warn(DB_BEIM_HOCHFAHREN_NICHT_VERFUEGBAR, e);
-            throw new RuntimeException(e);
-        }
-    }
-
-
-    /**
-     * Checks the  schema version.
-     *
-     * @param dataSource    The data source.
-     * @param schemaVersion The desired schema version.
-     * @return true, if schema version is ok.
-     * .
-     */
-    public boolean checkSchemaVersionNonCriticalDataSource(DataSource dataSource, String schemaVersion) {
-        try {
-            return checkSchemaVersion(dataSource, schemaVersion);
-        } catch (SQLException e) {
-            LOG.warn(DB_BEIM_HOCHFAHREN_NICHT_VERFUEGBAR, e);
-            throw new RuntimeException(e);
-        }
-    }
-
 }
