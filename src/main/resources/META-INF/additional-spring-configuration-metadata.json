@@ -1,0 +1,26 @@
+{
+  "properties": [
+    {
+      "name": "isy.util.datasource.schema-version",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "isy.util.datasource.schema-invalid-version-action",
+      "type": "java.lang.String",
+      "defaultValue": "fail"
+    }
+  ],
+  "hints": [
+    {
+      "name": "isy.util.datasource.schema-invalid-version-action",
+      "values": [
+        {
+        "value": "fail", "description": "If the schema version is invalid, the application will fail to start."
+        },
+        {
+         "value": "warn", "description": "If the schema version is invalid, a warning will be logged but execution will continue."
+        }
+      ]
+    }
+  ]
+}
