@@ -20,5 +20,10 @@ public final class FehlerSchluessel {
      */
     public static final String UNBEKANNTE_AUSPRAEGUNG = "PERSI00003";
 
+    /**
+     * The version of the database schema does not match the expected version ({0}).
+     */
+    public static final String FALSCHE_DB_SCHEMAVERSION = "PERSI00005";
+
 
 }
