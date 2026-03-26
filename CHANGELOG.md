@@ -19,6 +19,7 @@
 - `IFS-5038`: Implementierung eigener UserType-Klassen an Hibernate Version 6.x angepasst
 
 ### DEPENDENCY UPGRADES
+- Update org.springframework.boot:spring-boot-dependencies von Version 3.5.9 auf 3.5.10
 - Update org.apache.maven.plugins:maven-javadoc-plugin von Version 3.3.2 auf 3.12.0
 - Update org.apache.maven.plugins:maven-compiler-plugin von Version 3.14.1 auf 3.15.0
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.2 auf 4.0.3

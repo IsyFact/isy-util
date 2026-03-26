@@ -40,7 +40,7 @@
         <enforced.jdk.version>[25,26)</enforced.jdk.version>
         <enforced.maven.version>[3.6.3,4)</enforced.maven.version>
 
-        <spring-boot.version>4.0.3</spring-boot.version>
+        <spring-boot.version>4.0.4</spring-boot.version>
 
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
 
