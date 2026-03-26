@@ -29,8 +29,10 @@ Das Package `text` enthält Werkzeuge für die Erzeugung standardisierter Ausgab
 === Package persistence
 Das Package `de.bund.bva.isyfact.util.persistence` enthält unterstützende Klassen für den Umgang mit Datenbanken:
 
-* Das Unterpaket `datasource` enthält die Klasse `DataSourceCheck`, mit der Datenbanktabellen auf die richtige Schema-Version geprüft werden können.
-Mit der Klasse `ApplicationRunnerDbSchemaCheck` kann diese Prüfung beim Start einer Spring-Anwendung automatisiert werden.
+* Das Unterpaket `datasource` enthält die Klassen `DataSourceCheckRunner` und `DataSourceCheck` mit der die Schema-Version gegen eine Datenbanktabelle geprüft werden kann.
+** Mit der Klasse `DataSourcCheck` kann diese Prüfung manuell durchgeführt werden.
+** Mit der Klasse `DataSourceCheckRunner` kann diese Prüfung beim Start einer Spring-Anwendung automatisiert werden.
+** Weitere Details: <<persistence-datasource, Prüfen der DB Schema-Version>>.
 
 * Die Unterpakete `annotation` und `usertype` enthalten Klassen zum Umgang mit Enum-Entitäten.
 
@@ -57,7 +59,7 @@ class Demo {
 ----
 
 [[persistence-datasource]]
-=== Datasource-Check
+=== Prüfen der DB Schema-Version
 
 [IMPORTANT]
 ====
@@ -65,28 +67,13 @@ Die hier beschriebenen Klassen bewahren die Abwärtskompatibilität zur ehemals 
 Die aktuelle Version der IsyFact-Referenzarchitektur empfiehlt hingehen den Einsatz von xref:isyfact-standards-doku:referenzarchitektur:software-technisch/backend/persistenzschicht.adoc#versionierung[Liquibase].
 ====
 
-Eine Anfrage mit dem `DataSourceCheck` erfolgt über eine der Methoden `checkSchemaVersionCriticalDataSource` oder `checkSchemaVersionNonCriticalDataSource`.
-Beide Methoden liefern ein `boolean` zurück, auf das die Applikation entsprechend regieren kann.
+==== Voraussetzungen
 
-[[datasource-check]]
-.Durchführung einer Schema-Prüfung
-[source,java]
-----
-class Demo {
-    void startUp(DataSource dataSource, String version) {
-        DataSourceCheck dsc = new DataSourceCheck();
-        if(!dsc.checkSchemaVersionCriticalDatasource(dataSource, version)){
-            // handle errors, do logging etc
-        }
-    }
-}
-----
-
-Voraussetzung ist die Existenz einer Datenbank-Tabelle, die die aktuelle Schema-Version enthält.
-Der `DataSourceCheck` fragt die Tabelle mit einem voreingestellten SQL-Statement ab.
+Der `DataSourceCheck` setzt eine Datenbank-Tabelle voraus, welche die aktuelle Schema-Version enthält.
+Die Tabelle wird mittels eines vordefinierten SQL-Statements abgefragt.
 
 [[check-sql]]
-.Abfrage der Schema-Tabelle (Standard)
+.Abfrage der Schema-Tabelle
 [source,sql]
 ----
 SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status = 'gueltig'
@@ -94,7 +81,7 @@ SELECT version_nummer FROM m_schema_version WHERE version_nummer = ? AND status 
 
 Der <<check-sql>> liegt eine Tabelle in folgender Gestalt zugrunde.
 
-.Beispielhafte Schema-Tabelle
+.Vorlage Schema-Tabelle
 [[table-schema-version]]
 [cols="1m,2,3",options="header"]
 |====
@@ -119,11 +106,48 @@ a|
 Das Schema kann nicht verwendet werden und muss überprüft werden.
 |====
 
-Andere Formen der Schema-Tabelle können ebenfalls verwendet werden.
-In diesem Fall muss bei der Erzeugung das `DataSourceCheck` die geeignete SQL-Abfrage als Parameter angegeben werden.
+==== Automatische Prüfung beim Start
 
-Für Spring-Anwendungen existiert der Wrapper `ApplicationRunnerDbSchemaCheck`, der als Spring-Komponente hinzugefügt wird und als Implementierung eines `ApplicationRunner` nach vollständiger Initialisierung der Spring-Anwendung den Check automatisch durchführt.
+Die Bean `DataSourceCheckRunner` führt beim Anwendungsstart automatisch eine Datenbank-Schema-Validierung durch, wenn die Property `isy.util.datasource.schema-version` gesetzt ist.
 
+.Standardverhalten:
+Bei einer inkorrekten Schema-Version schlägt der Anwendungsstart fehl.
+
+.Alternatives Verhalten:
+Um bei einer inkorrekten Schema-Version lediglich eine Log-Nachricht auszugeben, muss die Property `isy.util.datasource.schema-invalid-version-action` auf `warn` gesetzt werden.
+
+==== Manuelle Prüfung (optional)
+
+Die Klasse `DataSourceCheck` stellt die Methode `checkSchemaVersion()` bereit.
+Diese gibt einen `boolean`-Wert zurück, auf den die Applikation entsprechend reagieren kann.
+
+[[datasource-check]]
+.Durchführung einer Schema-Prüfung
+[source,java]
+----
+class Demo {
+    void startUp(DataSource dataSource, String version) {
+        DataSourceCheck dsc = new DataSourceCheck();
+        if(!dsc.checkSchemaVersion(dataSource, version)){
+            // handle errors, do logging etc
+        }
+    }
+}
+----
+
+==== Properties
+
+[[table-datasource-properties]]
+.Konfigurationsparameter des DataSource-Check
+[cols="3m,2m,2m,8",options="header"]
+|===
+|Parameter |Wertebereich |Default |Beschreibung
+|isy.util.datasource.schema-version | String | null | Die in der Datenbank konfigurierte Schema-Version
+|isy.util.datasource.schema-invalid-version-action | String | fail |
+Legt das Verhalten bei inkorrekter Schema-Version fest:
+* `fail`: Die Anwendung startet nicht. +
+* `warn`: Die Anwendung loggt lediglich eine Warnung.
+|===
 
 [[enum-variablen]]
 === Enum-Variablen und Annotations
