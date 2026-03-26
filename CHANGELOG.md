@@ -19,6 +19,7 @@
 - `IFS-5038`: Implementierung eigener UserType-Klassen an Hibernate Version 6.x angepasst
 
 ### DEPENDENCY UPGRADES
+- Update org.springframework.boot:spring-boot-dependencies von Version 3.5.9 auf 3.5.10
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.2 auf 4.0.3
 - Update IsyFact/isy-github-actions-templates/.github/workflows/docs_build_template.yml von Version 2.1.1 auf 2.2.0
 - Update IsyFact/isy-github-actions-templates/.github/workflows/next_version.yml von Version 2.1.1 auf 2.2.0
