@@ -20,6 +20,7 @@
 
 ### DEPENDENCY UPGRADES
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.4 auf 4.0.5
+- Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.4 auf 3.5.5
 - Update org.cyclonedx:cyclonedx-maven-plugin von Version 2.7.11 auf 2.9.1
 - Update org.springframework.boot:spring-boot-dependencies von Version 3.5.9 auf 3.5.10
 - Update org.apache.maven.plugins:maven-javadoc-plugin von Version 3.3.2 auf 3.12.0
