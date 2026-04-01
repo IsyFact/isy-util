@@ -19,6 +19,7 @@
 - `IFS-5038`: Implementierung eigener UserType-Klassen an Hibernate Version 6.x angepasst
 
 ### DEPENDENCY UPGRADES
+- Update IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_merge_template.yml von Version 2.2.0 auf 2.3.0
 - Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.2 auf 4.9.8.3
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.4 auf 4.0.5
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.4 auf 3.5.5
