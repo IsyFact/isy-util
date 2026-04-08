@@ -20,6 +20,8 @@
 
 ### DEPENDENCY UPGRADES
 - Update IsyFact/isy-github-actions-templates/.github/workflows/maven_create_release_template.yml von Version 2.2.0 auf 2.3.0
+- Update IsyFact/isy-github-actions-templates/.github/workflows/maven_deploy_template.yml von Version 2.2.0 auf 2.3.0
+- Update IsyFact/isy-github-actions-templates/.github/workflows/maven_build_template.yml von Version 2.1.1 auf 2.3.0
 - Update com.github.spotbugs:spotbugs-maven-plugin von Version 4.9.8.2 auf 4.9.8.3
 - Update org.springframework.boot:spring-boot-dependencies von Version 4.0.4 auf 4.0.5
 - Update org.apache.maven.plugins:maven-surefire-plugin von Version 3.5.4 auf 3.5.5
