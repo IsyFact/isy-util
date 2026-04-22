@@ -7,6 +7,7 @@
   - `ISY-1025`: Entfernen der JUnit Engine-Testdependency
   - `IFS-4367`: Entfernen des Serviceproviders 
 - `IFS-4583`: Wiedereinführung der Quality-Gates
+- `IFS-5415`: Entfernen von Spring-Boot-Starter-Dependencies
 
 ### BREAKING CHANGES
 - `IFS-4922`: Aktualisierung von Java 17 auf 25
