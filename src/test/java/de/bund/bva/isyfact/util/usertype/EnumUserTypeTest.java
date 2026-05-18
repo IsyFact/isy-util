@@ -1,43 +1,25 @@
-/*
- * See the NOTICE file distributed with this work for additional
- * information regarding copyright ownership.
- * The Federal Office of Administration (Bundesverwaltungsamt, BVA)
- * licenses this file to you under the Apache License, Version 2.0 (the
- * License). You may not use this file except in compliance with the
- * License. You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
- * implied. See the License for the specific language governing
- * permissions and limitations under the License.
- */
 package de.bund.bva.isyfact.util.usertype;
 
-import de.bund.bva.isyfact.util.persistence.usertype.EnumUserType;
-import jakarta.persistence.PersistenceException;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import jakarta.persistence.PersistenceException;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import de.bund.bva.isyfact.util.persistence.usertype.EnumUserType;
 
 public class EnumUserTypeTest {
 
     private EnumUserType userType;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         userType = new EnumUserType();
     }
@@ -51,29 +33,36 @@ public class EnumUserTypeTest {
         assertEquals(Vorgangsstatus.IN_BEARBEITUNG, userType.convertStringToInstance("B"));
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test
     public void testSetParameterValuesNull() {
-        userType.setParameterValues(null);
+        assertThrows(NullPointerException.class, () ->
+            userType.setParameterValues(null));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesNoEnumClassSet() {
-        Properties prop = new Properties();
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesKeineEnumClass() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", Object.class.getName());
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", Object.class.getName());
+            userType.setParameterValues(prop);
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testSetParameterValuesKeineKlasse() {
-        Properties prop = new Properties();
-        prop.setProperty("enumClass", "ObjectA");
-        userType.setParameterValues(prop);
+        assertThrows(PersistenceException.class, () -> {
+            Properties prop = new Properties();
+            prop.setProperty("enumClass", "ObjectA");
+            userType.setParameterValues(prop);
+        });
     }
 
     @Test
@@ -89,26 +78,32 @@ public class EnumUserTypeTest {
         assertEquals(Vorgangsstatus.IN_BEARBEITUNG, userType.convertStringToInstance("B"));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testKeineAnnotationAnEnumKonstanten() {
-        userType.setEnumClass(Vermerkstyp.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(Vermerkstyp.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testDuplicatePersistentValue() {
-        userType.setEnumClass(DuplicatePersistentValueEnum.class);
+        assertThrows(PersistenceException.class, () ->
+            userType.setEnumClass(DuplicatePersistentValueEnum.class));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertStringToInstanceKeyNotExists() {
-        userType.setEnumClass(Vorgangsstatus.class);
-        userType.convertStringToInstance("");
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(Vorgangsstatus.class);
+            userType.convertStringToInstance("");
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testConvertInstanceToStringObjectNotExists() {
-        userType.setEnumClass(Vorgangsstatus.class);
-        userType.convertInstanceToString(Vermerkstyp.NACHRICHT_EMPFANGEN);
+        assertThrows(PersistenceException.class, () -> {
+            userType.setEnumClass(Vorgangsstatus.class);
+            userType.convertInstanceToString(Vermerkstyp.NACHRICHT_EMPFANGEN);
+        });
     }
 
     @Test

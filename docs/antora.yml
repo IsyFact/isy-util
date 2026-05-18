@@ -1,0 +1,6 @@
+name: util
+title: Baustein Util
+prerelease: false
+start_page: ROOT:konzept.adoc
+nav:
+- modules/ROOT/nav.adoc
