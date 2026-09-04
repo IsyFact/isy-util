@@ -44,7 +44,7 @@
 
         <logstash-logback-encoder.version>8.1</logstash-logback-encoder.version>
 
-        <maven.surefire.version>3.5.6</maven.surefire.version>
+        <maven.surefire.version>3.6.0</maven.surefire.version>
         <maven.checkstyle.version>3.6.0</maven.checkstyle.version>
         <maven.jar.version>3.5.1</maven.jar.version>
         <maven.flatten.version>1.8.0</maven.flatten.version>
