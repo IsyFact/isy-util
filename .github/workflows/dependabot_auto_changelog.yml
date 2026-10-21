@@ -10,4 +10,4 @@ jobs:
   generate-changelog-entry:
     permissions:
       contents: read
-    uses: IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml@v2.1.1
+    uses: IsyFact/isy-github-actions-templates/.github/workflows/dependabot_auto_changelog_template.yml@v3.1.0
